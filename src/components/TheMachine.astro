@@ -1,0 +1,105 @@
+---
+const segments = [
+  { label: "Platform: 50–65%", width: "55%", color: "#dc2626", textColor: "text-red-500" },
+  { label: "Studio: ~25–35%", width: "35%", color: "#ea580c", textColor: "text-orange-500" },
+  { label: "Model: as little as 10%", width: "10%", color: "#16a34a", textColor: "text-green-500" },
+];
+---
+
+<section class="reveal-section opacity-0 max-w-5xl mx-auto py-24 px-6">
+  <h2 class="font-mono text-3xl md:text-5xl font-bold text-white mb-16">
+    The Machine
+  </h2>
+  <p class="text-lg text-gray-500 font-mono mb-12">
+    Where the money goes
+  </p>
+
+  <!-- Revenue bar visualization -->
+  <div class="mb-6">
+    <div class="h-12 rounded-full overflow-hidden bg-gray-800 flex">
+      {segments.map((seg) => (
+        <div
+          class="h-full flex items-center justify-center transition-all"
+          style={`width: ${seg.width}; background-color: ${seg.color};`}
+        >
+          <span class="text-xs md:text-sm font-mono text-white font-bold truncate px-2">
+            {seg.width === "10%" ? "" : seg.label}
+          </span>
+        </div>
+      ))}
+    </div>
+
+    <!-- Labels below bar -->
+    <div class="flex mt-3">
+      {segments.map((seg) => (
+        <div class="font-mono text-xs md:text-sm" style={`width: ${seg.width};`}>
+          <span class={seg.textColor}>{seg.label}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Source -->
+  <a
+    href="https://www.hrw.org/report/2024/12/09/i-learned-how-say-no/labor-abuses-sexual-exploitation-colombian-webcam-studios"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="text-xs text-gray-600 hover:text-gray-400 transition-colors underline underline-offset-2"
+  >
+    Source: HRW 2024
+  </a>
+
+  <!-- Contrast box -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16">
+    <!-- Platform owner -->
+    <div class="bg-dark-card border border-red-600/30 rounded-xl p-8">
+      <p class="text-4xl font-mono font-bold text-red-500">
+        $1,000,000,000
+      </p>
+      <p class="text-sm text-gray-400 mt-3">
+        OnlyFans owner dividends (2021–2023)
+      </p>
+      <a
+        href="https://www.icij.org/news/2024/12/as-billion-dollar-webcam-industry-booms-models-suffer-at-hands-of-colombian-studios/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-xs text-gray-600 mt-2 hover:text-gray-400 transition-colors underline underline-offset-2 inline-block"
+      >
+        Source: ICIJ 2024
+      </a>
+    </div>
+
+    <!-- Average creator -->
+    <div class="bg-dark-card border border-gray-600/30 rounded-xl p-8">
+      <p class="text-4xl font-mono font-bold text-gray-500">
+        $180
+      </p>
+      <p class="text-sm text-gray-400 mt-3">
+        Average monthly creator earnings
+      </p>
+      <a
+        href="https://www.projectmonashouse.com/post/onlyfans-empowering-or-exploitative"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-xs text-gray-600 mt-2 hover:text-gray-400 transition-colors underline underline-offset-2 inline-block"
+      >
+        Source: Project Mona's House
+      </a>
+    </div>
+  </div>
+
+  <!-- Key stat -->
+  <div class="mt-12 text-center">
+    <p class="font-mono text-lg text-gray-300 max-w-3xl mx-auto">
+      49 of 50 webcam models had never seen or signed their own terms of service.
+    </p>
+    <a
+      href="https://www.hrw.org/report/2024/12/09/i-learned-how-say-no/labor-abuses-sexual-exploitation-colombian-webcam-studios"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="text-xs text-gray-600 mt-2 hover:text-gray-400 transition-colors underline underline-offset-2 inline-block"
+    >
+      Source: HRW 2024
+    </a>
+  </div>
+</section>

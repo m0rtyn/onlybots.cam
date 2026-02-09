@@ -1,0 +1,62 @@
+---
+// PlatformHeader.astro — Sticky nav bar mimicking a webcam platform
+---
+
+<header class="platform-header sticky top-0 z-50 w-full bg-[#0a0a0a] border-b border-gray-800/50" data-phase="bait">
+  <!-- Main nav row -->
+  <div class="flex items-center justify-between h-[60px] max-w-7xl mx-auto px-4">
+    <!-- Left: Logo -->
+    <a href="#" class="flex items-center gap-0 shrink-0">
+      <span class="text-xl font-bold text-white tracking-tight">onlybots</span>
+      <span class="text-xl font-bold text-neon-pink neon-glow-text">.cam</span>
+    </a>
+
+    <!-- Center: Fake search bar -->
+    <div class="hidden md:flex flex-1 max-w-md mx-6">
+      <div class="relative w-full">
+        <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <input
+          type="text"
+          placeholder="Search models..."
+          class="w-full bg-dark-surface text-sm text-gray-300 placeholder-gray-500 rounded-full pl-10 pr-4 py-2 border border-gray-700/50 focus:outline-none focus:border-neon-pink/40 cursor-not-allowed"
+          disabled
+        />
+      </div>
+    </div>
+
+    <!-- Right: Notification bell + avatar -->
+    <div class="flex items-center gap-4 shrink-0">
+      <!-- Notification bell -->
+      <button class="relative text-gray-400 hover:text-white transition-colors cursor-default" aria-label="Notifications">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+        </svg>
+        <!-- Red badge -->
+        <span class="absolute -top-1 -right-1.5 bg-red-500 text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center leading-none">3</span>
+      </button>
+
+      <!-- Fake user avatar -->
+      <div class="w-8 h-8 rounded-full bg-gradient-to-br from-neon-pink to-purple-600 flex items-center justify-center text-white text-xs font-bold ring-2 ring-gray-700 cursor-default">
+        U
+      </div>
+    </div>
+  </div>
+
+  <!-- Secondary nav: category links -->
+  <nav class="max-w-7xl mx-auto px-4 pb-2 flex items-center gap-6 overflow-x-auto scrollbar-hide">
+    <a href="#" class="text-sm text-gray-400 hover:text-neon-pink transition-colors whitespace-nowrap font-medium">
+      Explore
+    </a>
+    <a href="#" class="text-sm text-gray-400 hover:text-neon-pink transition-colors whitespace-nowrap font-medium">
+      Categories
+    </a>
+    <a href="#" class="text-sm text-neon-pink whitespace-nowrap font-medium">
+      New
+    </a>
+    <a href="#" class="text-sm text-gray-400 hover:text-neon-pink transition-colors whitespace-nowrap font-medium">
+      Top Rated
+    </a>
+  </nav>
+</header>

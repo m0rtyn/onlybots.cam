@@ -1,0 +1,36 @@
+---
+const paragraphs = [
+  "I'm a developer. I bought the domain onlybots.cam as a creative experiment, but the more I researched the webcam industry, the more I felt compelled to use it for something that matters.",
+  "Every statistic on this page is sourced from peer-reviewed research, investigative journalism, or human rights reports. No claims are unsourced. The horror is in the numbers.",
+  "This is not an attack on individuals — it's a spotlight on an industry that profits from exploitation while hiding behind terms of service that workers never read or signed.",
+  "If this page changed something in your thinking, consider sharing it or supporting one of the organizations listed above.",
+];
+---
+
+<section class="reveal-section opacity-0 max-w-3xl mx-auto py-24 px-6">
+  <div class="border-t border-gray-800 mb-16"></div>
+
+  <h2 class="font-mono text-2xl font-bold text-white mb-8">
+    Why I Built This
+  </h2>
+
+  {paragraphs.map((p) => (
+    <p class="text-gray-400 font-mono text-base leading-relaxed mb-6">
+      {p}
+    </p>
+  ))}
+
+  <div class="mt-12">
+    <a
+      href="#"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="text-electric-blue text-sm font-mono hover:underline underline-offset-2"
+    >
+      View source on GitHub
+    </a>
+    <p class="text-xs text-gray-600 mt-2 font-mono">
+      Built with Astro, Tailwind CSS, Three.js, and GSAP
+    </p>
+  </div>
+</section>

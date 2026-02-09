@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PlatformHeader from '../components/PlatformHeader.astro';
+import LandingGrid from '../components/LandingGrid.astro';
+import TheSwitch from '../components/TheSwitch';
+import DigitalCage from '../components/DigitalCage';
+import TheRealCost from '../components/TheRealCost.astro';
+import BehindTheScreen from '../components/BehindTheScreen.astro';
+import TheMachine from '../components/TheMachine.astro';
+import WhatYouCanDo from '../components/WhatYouCanDo.astro';
+import WhyIBuiltThis from '../components/WhyIBuiltThis.astro';
+import PlatformFooter from '../components/PlatformFooter.astro';
+---
+
+<Layout>
+  <TheSwitch client:load>
+    <PlatformHeader />
+    <main>
+      <LandingGrid />
+    </main>
+  </TheSwitch>
+
+  <!-- Reveal sections (hidden until switch, animated in by TheSwitch via .reveal-section DOM queries) -->
+  <TheRealCost />
+  <BehindTheScreen />
+  <TheMachine />
+  <WhatYouCanDo />
+  <WhyIBuiltThis />
+
+  <!-- Three.js scene (lazy loaded, appears after switch via MutationObserver on body.reveal-state) -->
+  <DigitalCage client:visible />
+
+  <PlatformFooter />
+</Layout>

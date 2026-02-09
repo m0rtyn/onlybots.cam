@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Polaris Project",
+    "description": "Operates the U.S. National Human Trafficking Hotline and works to disrupt trafficking networks through data-driven strategies.",
+    "url": "https://polarisproject.org",
+    "category": "anti-trafficking"
+  },
+  {
+    "name": "Not For Sale",
+    "description": "Global organization working to end modern slavery through prevention, intervention, and aftercare programs.",
+    "url": "https://www.notforsalecampaign.org",
+    "category": "anti-trafficking"
+  },
+  {
+    "name": "The Exodus Road",
+    "description": "Partners with law enforcement worldwide to rescue victims of human trafficking and sexual exploitation.",
+    "url": "https://theexodusroad.com",
+    "category": "anti-trafficking"
+  },
+  {
+    "name": "Human Rights Watch",
+    "description": "International organization that investigates and reports on abuses including labor exploitation in the webcam industry.",
+    "url": "https://www.hrw.org",
+    "category": "research"
+  },
+  {
+    "name": "ICIJ (International Consortium of Investigative Journalists)",
+    "description": "Global network of journalists that exposed exploitation in the billion-dollar webcam industry.",
+    "url": "https://www.icij.org",
+    "category": "reporting"
+  },
+  {
+    "name": "National Human Trafficking Hotline",
+    "description": "24/7 confidential hotline (1-888-373-7888) for reporting tips, connecting with services, and requesting training or technical assistance.",
+    "url": "https://humantraffickinghotline.org",
+    "category": "support"
+  },
+  {
+    "name": "Project Mona's House",
+    "description": "Provides transitional housing and support services to survivors of sex trafficking and sexual exploitation.",
+    "url": "https://www.projectmonashouse.com",
+    "category": "support"
+  },
+  {
+    "name": "NCMEC (National Center for Missing & Exploited Children)",
+    "description": "Works to find missing children, reduce child sexual exploitation, and prevent future victimization.",
+    "url": "https://www.missingkids.org",
+    "category": "anti-trafficking"
+  }
+]

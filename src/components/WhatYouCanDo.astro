@@ -1,0 +1,161 @@
+---
+const categoryColors: Record<string, { bg: string; text: string }> = {
+  "anti-trafficking": { bg: "bg-red-900/40", text: "text-red-400" },
+  research: { bg: "bg-blue-900/40", text: "text-blue-400" },
+  support: { bg: "bg-green-900/40", text: "text-green-400" },
+  reporting: { bg: "bg-yellow-900/40", text: "text-yellow-400" },
+};
+
+const resources = [
+  {
+    name: "Polaris Project",
+    description: "Operates the U.S. National Human Trafficking Hotline and works to disrupt trafficking networks through data-driven strategies.",
+    url: "https://polarisproject.org",
+    category: "anti-trafficking",
+  },
+  {
+    name: "Not For Sale",
+    description: "Global organization working to end modern slavery through prevention, intervention, and aftercare programs.",
+    url: "https://www.notforsalecampaign.org",
+    category: "anti-trafficking",
+  },
+  {
+    name: "The Exodus Road",
+    description: "Partners with law enforcement worldwide to rescue victims of human trafficking and sexual exploitation.",
+    url: "https://theexodusroad.com",
+    category: "anti-trafficking",
+  },
+  {
+    name: "Human Rights Watch",
+    description: "International organization that investigates and reports on abuses including labor exploitation in the webcam industry.",
+    url: "https://www.hrw.org",
+    category: "research",
+  },
+  {
+    name: "ICIJ (International Consortium of Investigative Journalists)",
+    description: "Global network of journalists that exposed exploitation in the billion-dollar webcam industry.",
+    url: "https://www.icij.org",
+    category: "reporting",
+  },
+  {
+    name: "National Human Trafficking Hotline",
+    description: "24/7 confidential hotline (1-888-373-7888) for reporting tips, connecting with services, and requesting training or technical assistance.",
+    url: "https://humantraffickinghotline.org",
+    category: "support",
+  },
+  {
+    name: "Project Mona's House",
+    description: "Provides transitional housing and support services to survivors of sex trafficking and sexual exploitation.",
+    url: "https://www.projectmonashouse.com",
+    category: "support",
+  },
+  {
+    name: "NCMEC (National Center for Missing & Exploited Children)",
+    description: "Works to find missing children, reduce child sexual exploitation, and prevent future victimization.",
+    url: "https://www.missingkids.org",
+    category: "anti-trafficking",
+  },
+];
+---
+
+<section class="reveal-section opacity-0 max-w-5xl mx-auto py-24 px-6">
+  <h2 class="font-mono text-3xl md:text-5xl font-bold text-white mb-8">
+    What You Can Do
+  </h2>
+  <p class="text-lg text-gray-400 font-mono mb-16">
+    Don't just close the tab.
+  </p>
+
+  <!-- Resource cards -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    {resources.map((r) => {
+      const colors = categoryColors[r.category] || { bg: "bg-gray-800", text: "text-gray-400" };
+      return (
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6 flex flex-col">
+          <div class="flex items-start justify-between gap-3">
+            <h3 class="text-lg font-bold text-white">{r.name}</h3>
+            <span class={`${colors.bg} ${colors.text} text-xs font-mono px-2 py-1 rounded-full whitespace-nowrap shrink-0`}>
+              {r.category}
+            </span>
+          </div>
+          <p class="text-sm text-gray-400 mt-2 flex-1">
+            {r.description}
+          </p>
+          <a
+            href={r.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-sm text-electric-blue mt-4 hover:underline underline-offset-2 inline-flex items-center gap-1"
+          >
+            Visit
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      );
+    })}
+  </div>
+
+  <!-- Share section -->
+  <div class="mt-16 text-center">
+    <p class="text-lg font-mono text-gray-300 mb-4">
+      Spread the word
+    </p>
+    <button
+      id="share-btn"
+      class="inline-flex items-center gap-2 bg-electric-blue/10 border border-electric-blue/30 text-electric-blue font-mono text-sm px-6 py-3 rounded-lg hover:bg-electric-blue/20 transition-colors cursor-pointer"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+      </svg>
+      Share this page
+    </button>
+    <p id="share-feedback" class="text-xs text-gray-500 mt-2 opacity-0 transition-opacity duration-300"></p>
+  </div>
+</section>
+
+<script>
+  const shareBtn = document.getElementById("share-btn");
+  const feedback = document.getElementById("share-feedback");
+
+  const shareText = "onlybots.cam — They're always online. They never say no. But at what cost? https://onlybots.cam";
+
+  shareBtn?.addEventListener("click", async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: "onlybots.cam",
+          text: "They're always online. They never say no. But at what cost?",
+          url: "https://onlybots.cam",
+        });
+      } catch (err) {
+        // User cancelled share — do nothing
+      }
+    } else {
+      try {
+        await navigator.clipboard.writeText(shareText);
+        if (feedback) {
+          feedback.textContent = "Link copied to clipboard!";
+          feedback.style.opacity = "1";
+          setTimeout(() => {
+            feedback.style.opacity = "0";
+          }, 2500);
+        }
+      } catch {
+        // Fallback: select from a temporary input
+        const input = document.createElement("input");
+        input.value = shareText;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand("copy");
+        document.body.removeChild(input);
+        if (feedback) {
+          feedback.textContent = "Link copied to clipboard!";
+          feedback.style.opacity = "1";
+          setTimeout(() => {
+            feedback.style.opacity = "0";
+          }, 2500);
+        }
+      }
+    }
+  });
+</script>

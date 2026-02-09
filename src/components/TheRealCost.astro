@@ -1,0 +1,62 @@
+---
+const stats = [
+  {
+    number: "41.8%",
+    description: "Depression rate among sex workers",
+    detail: "Systematic review of 68 papers covering 24,940 participants found depression prevalence of 41.8%, anxiety at 21%, and PTSD at 19.7%.",
+    source: "Beattie et al. 2020",
+    sourceUrl: "https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1003297",
+  },
+  {
+    number: "48%",
+    description: "Lifetime suicidality among sex workers",
+    detail: "In a Vancouver study of 867 women sex workers, 46% reported lifetime suicidal ideation and 33% had attempted suicide.",
+    source: "Argento et al. 2019",
+    sourceUrl: "https://pmc.ncbi.nlm.nih.gov/articles/PMC7608559/",
+  },
+  {
+    number: "$1B",
+    description: "In dividends to one platform owner. Average creator earns $180/month.",
+    detail: "OnlyFans owner earned $1 billion in dividends between 2021–2023. Meanwhile, 73% of total revenue comes from just the top 10% of creators.",
+    source: "ICIJ 2024",
+    sourceUrl: "https://www.icij.org/news/2024/12/as-billion-dollar-webcam-industry-booms-models-suffer-at-hands-of-colombian-studios/",
+  },
+  {
+    number: "65%",
+    description: "Reported rape in pornography production",
+    detail: "A 2025 Nordic study of individuals filmed for pornography found 87% experienced verbal abuse, 65% reported rape, and 56% suffered physical assault.",
+    source: "Donevan 2025",
+    sourceUrl: "https://www.tandfonline.com/doi/full/10.1080/08039488.2025.2464634",
+  },
+];
+---
+
+<section class="reveal-section opacity-0 w-full min-h-screen py-24">
+  <h2 class="font-mono text-4xl md:text-6xl font-bold text-white text-center mb-20">
+    The Real Cost
+  </h2>
+
+  <div class="flex flex-col items-center">
+    {stats.map((stat) => (
+      <div class="py-32 flex flex-col items-center justify-center text-center max-w-4xl mx-auto px-6">
+        <span class="text-7xl md:text-9xl font-mono font-bold text-white leading-none">
+          {stat.number}
+        </span>
+        <p class="text-xl md:text-2xl text-gray-400 font-mono mt-4 max-w-2xl">
+          {stat.description}
+        </p>
+        <p class="text-sm text-gray-500 mt-3 max-w-xl">
+          {stat.detail}
+        </p>
+        <a
+          href={stat.sourceUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-sm text-gray-600 mt-2 hover:text-gray-400 transition-colors underline underline-offset-2"
+        >
+          Source: {stat.source}
+        </a>
+      </div>
+    ))}
+  </div>
+</section>

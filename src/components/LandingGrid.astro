@@ -1,0 +1,142 @@
+---
+// LandingGrid.astro — Main grid of ProfileCards with hardcoded bot/stat data
+import ProfileCard from './ProfileCard.astro';
+
+const cards = [
+  {
+    name: 'Model_4827',
+    badge: '🔥 Live Now',
+    fans: '4,892',
+    rating: '4.9',
+    price: '$9.99',
+    avatarSeed: 4827,
+    statId: 'earnings-gap',
+    revealStat: '$180/mo',
+    revealText: 'Average OnlyFans creator earnings. Platform owner took $1B in dividends (2021-2023).',
+    revealSource: 'ICIJ 2024',
+    revealSourceUrl: 'https://www.icij.org/news/2024/12/as-billion-dollar-webcam-industry-booms-models-suffer-at-hands-of-colombian-studios/',
+  },
+  {
+    name: 'Unit_0093',
+    badge: '✨ New',
+    fans: '1,247',
+    rating: '4.7',
+    price: '$14.99',
+    avatarSeed: 93,
+    statId: 'suicidality',
+    revealStat: '48%',
+    revealText: 'Lifetime suicidality rate among sex workers in Vancouver cohort study.',
+    revealSource: 'Argento et al. 2019',
+    revealSourceUrl: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC7608559/',
+  },
+  {
+    name: 'Entity_7741',
+    badge: '⭐ Top Rated',
+    fans: '12,408',
+    rating: '5.0',
+    price: '$19.99',
+    avatarSeed: 7741,
+    statId: 'coercion-hours',
+    revealStat: '18+ hrs',
+    revealText: 'Models coerced to stream 18+ hours. Fined for taking bathroom breaks.',
+    revealSource: 'HRW 2024',
+    revealSourceUrl: 'https://www.hrw.org/report/2024/12/09/i-learned-how-say-no/labor-abuses-sexual-exploitation-colombian-webcam-studios',
+  },
+  {
+    name: 'Synth_3319',
+    badge: '🔥 Live Now',
+    fans: '3,156',
+    rating: '4.8',
+    price: '$7.99',
+    avatarSeed: 3319,
+    statId: 'underage-entry',
+    revealStat: '7 of 50',
+    revealText: 'Models interviewed began working in webcam studios before age 18. Some from age 13.',
+    revealSource: 'HRW 2024',
+    revealSourceUrl: 'https://www.hrw.org/report/2024/12/09/i-learned-how-say-no/labor-abuses-sexual-exploitation-colombian-webcam-studios',
+  },
+  {
+    name: 'Pixel_8856',
+    badge: '✨ New',
+    fans: '891',
+    rating: '4.6',
+    price: '$11.99',
+    avatarSeed: 8856,
+    statId: 'verbal-abuse',
+    revealStat: '87%',
+    revealText: 'Reported verbal abuse. 65% reported rape in pornography production.',
+    revealSource: 'Donevan 2025',
+    revealSourceUrl: 'https://www.tandfonline.com/doi/full/10.1080/08039488.2025.2464634',
+  },
+  {
+    name: 'Nova_2104',
+    badge: '🔥 Live Now',
+    fans: '6,723',
+    rating: '4.9',
+    price: '$9.99',
+    avatarSeed: 2104,
+    statId: 'performer-cut',
+    revealStat: '10%',
+    revealText: 'What the actual performer takes home. Platforms take 50-65%, studios take most of the rest.',
+    revealSource: 'HRW 2024',
+    revealSourceUrl: 'https://www.hrw.org/report/2024/12/09/i-learned-how-say-no/labor-abuses-sexual-exploitation-colombian-webcam-studios',
+  },
+  {
+    name: 'Echo_5567',
+    badge: '⭐ Top Rated',
+    fans: '8,341',
+    rating: '4.8',
+    price: '$24.99',
+    avatarSeed: 5567,
+    statId: 'no-contracts',
+    revealStat: '49 of 50',
+    revealText: 'Webcam models had never seen or signed their own terms of service.',
+    revealSource: 'HRW 2024',
+    revealSourceUrl: 'https://www.hrw.org/report/2024/12/09/i-learned-how-say-no/labor-abuses-sexual-exploitation-colombian-webcam-studios',
+  },
+  {
+    name: 'Void_9902',
+    badge: '✨ New',
+    fans: '2,034',
+    rating: '4.7',
+    price: '$12.99',
+    avatarSeed: 9902,
+    statId: 'depression-rate',
+    revealStat: '41.8%',
+    revealText: 'Depression rate among sex workers. Anxiety: 21%. PTSD: 19.7%.',
+    revealSource: 'Beattie et al. 2020',
+    revealSourceUrl: 'https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1003297',
+  },
+];
+---
+
+<section class="landing-grid max-w-7xl mx-auto px-4 py-8" data-phase="bait">
+  <!-- Online count -->
+  <div class="flex items-center gap-2 mb-6">
+    <span class="relative flex h-2.5 w-2.5">
+      <span class="animate-pulse-slow absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+      <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+    </span>
+    <span class="text-sm text-gray-400">1,247 models online now</span>
+  </div>
+
+  <!-- Card grid -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    {cards.map((card) => (
+      <ProfileCard {...card} />
+    ))}
+  </div>
+
+  <!-- Load More button -->
+  <div class="flex justify-center mt-10">
+    <button class="load-more-btn bg-dark-surface hover:bg-gray-800 transition-colors text-gray-300 text-sm font-medium px-8 py-2.5 rounded-full border border-gray-700/50">
+      Load More
+    </button>
+  </div>
+
+  <!-- Bot typing indicator -->
+  <div class="flex items-center justify-center gap-2 mt-6 text-gray-500 text-sm">
+    <span>🤖</span>
+    <span>Bot is typing<span class="typing-dots"></span></span>
+  </div>
+</section>

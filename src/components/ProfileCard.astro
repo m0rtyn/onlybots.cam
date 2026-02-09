@@ -1,0 +1,113 @@
+---
+// ProfileCard.astro — Cam model profile card with bait front / reveal back
+interface Props {
+  name: string;
+  badge: string;
+  fans: string;
+  rating: string;
+  price: string;
+  avatarSeed: number;
+  statId: string;
+  revealStat: string;
+  revealText: string;
+  revealSource: string;
+  revealSourceUrl: string;
+}
+
+const {
+  name,
+  badge,
+  fans,
+  rating,
+  price,
+  avatarSeed,
+  statId,
+  revealStat,
+  revealText,
+  revealSource,
+  revealSourceUrl,
+} = Astro.props;
+
+// Derive gradient hues from the seed
+const hue1 = (avatarSeed * 137) % 360;
+const hue2 = (hue1 + 45) % 360;
+const avatarGradient = `linear-gradient(135deg, hsl(${hue1}, 70%, 50%), hsl(${hue2}, 80%, 40%))`;
+
+// Badge styling
+const badgeStyles: Record<string, string> = {
+  '🔥 Live Now': 'bg-neon-pink/90 text-white',
+  '✨ New': 'bg-electric-blue/90 text-white',
+  '⭐ Top Rated': 'bg-yellow-500/90 text-black',
+};
+const badgeClass = badgeStyles[badge] || 'bg-gray-600 text-white';
+---
+
+<div
+  class="card-flip relative w-full rounded-xl overflow-hidden"
+  style="aspect-ratio: 7 / 9;"
+  data-stat-id={statId}
+>
+  <!-- ===== FRONT FACE (BAIT) ===== -->
+  <div class="card-front flex flex-col items-center bg-dark-card p-5 pt-6 static-noise">
+    <!-- Avatar circle -->
+    <div
+      class="w-[120px] h-[120px] rounded-full mb-4 ring-2 ring-neon-pink/30 shrink-0"
+      style={`background: ${avatarGradient}; filter: blur(1px) saturate(1.5); mix-blend-mode: luminosity;`}
+      aria-hidden="true"
+    ></div>
+
+    <!-- Bot name -->
+    <h3 class="text-white font-semibold text-base tracking-wide mb-2">{name}</h3>
+
+    <!-- Badge -->
+    <span class={`inline-flex items-center text-xs font-semibold px-2.5 py-0.5 rounded-full mb-3 ${badgeClass}`}>
+      {badge}
+    </span>
+
+    <!-- Fans + Rating row -->
+    <div class="flex items-center gap-4 text-xs text-gray-400 mb-2">
+      <span>❤️ {fans} fans</span>
+      <span>⭐ {rating}</span>
+    </div>
+
+    <!-- Price -->
+    <p class="text-white text-sm font-medium mb-4">{price}<span class="text-gray-500">/mo</span></p>
+
+    <!-- Subscribe button -->
+    <button
+      class="subscribe-btn w-full bg-neon-pink hover:brightness-110 transition-all text-white font-bold py-2 rounded-lg text-sm mt-auto neon-glow"
+      data-stat-id={statId}
+    >
+      Subscribe
+    </button>
+  </div>
+
+  <!-- ===== BACK FACE (REVEAL) ===== -->
+  <div class="card-back flex flex-col bg-dark-card overflow-hidden">
+    <!-- Colored top bar -->
+    <div class="h-1 w-full bg-reveal-red"></div>
+    <!-- Red border accent -->
+    <div class="border-t-4 border-reveal-red"></div>
+
+    <!-- Content -->
+    <div class="flex flex-col items-center justify-center flex-1 p-6 text-center">
+      <!-- Large stat -->
+      <p class="text-white font-mono text-3xl font-bold mb-4 leading-tight">{revealStat}</p>
+
+      <!-- Description -->
+      <p class="text-gray-300 font-mono text-sm leading-relaxed mb-6 max-w-[220px]">{revealText}</p>
+    </div>
+
+    <!-- Source citation pinned to bottom -->
+    <div class="px-4 pb-4 mt-auto text-center">
+      <a
+        href={revealSourceUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-xs text-gray-500 hover:text-gray-400 transition-colors underline decoration-gray-700"
+      >
+        Source: {revealSource}
+      </a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,112 @@
+[
+  {
+    "id": "top-earner",
+    "baitLabel": "💰 Top Earner",
+    "baitValue": "$12,400/mo",
+    "revealStat": "Average creator earns $180/month",
+    "revealDetail": "73% of OnlyFans total revenue comes from just the top 10% of creators. The platform owner took home $1 billion in dividends between 2021–2023.",
+    "source": "Project Mona's House / ICIJ 2024",
+    "sourceUrl": "https://www.projectmonashouse.com/post/onlyfans-empowering-or-exploitative",
+    "category": "financial"
+  },
+  {
+    "id": "fan-count",
+    "baitLabel": "❤️ 4,892 fans",
+    "baitValue": "Joined today: +37",
+    "revealStat": "48% of sex workers report lifetime suicidality",
+    "revealDetail": "In a Vancouver study of 867 women sex workers, 46% reported lifetime suicidal ideation and 33% had attempted suicide. 91% of suicidal sex workers reported childhood physical or sexual abuse.",
+    "source": "Argento et al. 2019",
+    "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7608559/",
+    "category": "mental-health"
+  },
+  {
+    "id": "live-now",
+    "baitLabel": "🔥 Live Now",
+    "baitValue": "Streaming 2h 14m",
+    "revealStat": "Models coerced to stream 18–24 hours. Fined for bathroom breaks.",
+    "revealDetail": "Studio managers pressure models to stream 8+ hours without breaks, with some shifts lasting 18–24 hours. Models are fined for taking breaks or pausing streams.",
+    "source": "HRW 2024",
+    "sourceUrl": "https://www.hrw.org/report/2024/12/09/i-learned-how-say-no/labor-abuses-sexual-exploitation-colombian-webcam-studios",
+    "category": "exploitation"
+  },
+  {
+    "id": "new-model",
+    "baitLabel": "✨ New Model",
+    "baitValue": "Just verified!",
+    "revealStat": "7 of 50 models interviewed began working before age 18",
+    "revealDetail": "In HRW's investigation, 7 models reported working in webcam studios before age 18, some starting as young as 13. Studios use already-verified accounts of former models to bypass age verification for minors.",
+    "source": "HRW 2024",
+    "sourceUrl": "https://www.hrw.org/report/2024/12/09/i-learned-how-say-no/labor-abuses-sexual-exploitation-colombian-webcam-studios",
+    "category": "trafficking"
+  },
+  {
+    "id": "rating",
+    "baitLabel": "⭐ 4.9 Rating",
+    "baitValue": "98% satisfaction",
+    "revealStat": "87% reported verbal abuse. 65% reported rape.",
+    "revealDetail": "A 2025 Nordic study of individuals filmed for pornography found 87% experienced verbal abuse, 65% reported rape, and 56% suffered physical assault during production.",
+    "source": "Donevan 2025",
+    "sourceUrl": "https://www.tandfonline.com/doi/full/10.1080/08039488.2025.2464634",
+    "category": "violence"
+  },
+  {
+    "id": "send-tip",
+    "baitLabel": "🎁 Send a Tip",
+    "baitValue": "Top tip today: $500",
+    "revealStat": "Workers receive as little as 10% of the income they generate",
+    "revealDetail": "Platforms retain 50–65% of model earnings. Studios keep ~60% of what's left. The actual performer can receive as little as 10% of the total revenue their work generates.",
+    "source": "HRW 2024",
+    "sourceUrl": "https://www.hrw.org/report/2024/12/09/i-learned-how-say-no/labor-abuses-sexual-exploitation-colombian-webcam-studios",
+    "category": "financial"
+  },
+  {
+    "id": "chat-now",
+    "baitLabel": "💬 Chat Now",
+    "baitValue": "142 in room",
+    "revealStat": "49 of 50 models never saw or signed their own terms of service",
+    "revealDetail": "In HRW's investigation of Colombian webcam studios, 49 of 50 models had never seen or signed the terms of service for any platform they performed on. Studio managers accepted client requests for sex acts on the model's behalf, before consent.",
+    "source": "HRW 2024",
+    "sourceUrl": "https://www.hrw.org/report/2024/12/09/i-learned-how-say-no/labor-abuses-sexual-exploitation-colombian-webcam-studios",
+    "category": "exploitation"
+  },
+  {
+    "id": "private-show",
+    "baitLabel": "🔒 Private Show",
+    "baitValue": "60 tokens/min",
+    "revealStat": "Paywalled content prevents law enforcement from investigating trafficking",
+    "revealDetail": "Missing children linked to OnlyFans content nearly tripled between 2019 and 2020. An investigator found 10 child sexual abuse images sourced from OnlyFans within one hour on other platforms — the youngest victim was approximately 5 years old.",
+    "source": "The Exodus Road 2024 / NCMEC",
+    "sourceUrl": "https://theexodusroad.com/the-role-of-onlyfans-in-human-trafficking/",
+    "category": "trafficking"
+  },
+  {
+    "id": "depression",
+    "baitLabel": "😊 Mood: Happy",
+    "baitValue": "Feeling great today!",
+    "revealStat": "41.8% of sex workers experience depression",
+    "revealDetail": "A systematic review of 68 papers covering 24,940 participants found depression prevalence of 41.8%, anxiety at 21%, and PTSD at 19.7% among female sex workers in low- and middle-income countries.",
+    "source": "Beattie et al. 2020",
+    "sourceUrl": "https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1003297",
+    "category": "mental-health"
+  },
+  {
+    "id": "platform-profit",
+    "baitLabel": "🏆 Premium Platform",
+    "baitValue": "Trusted & Safe",
+    "revealStat": "Stripchat grossed $100M+ in profits in 2022 alone",
+    "revealDetail": "OnlyFans owner earned $1 billion in dividends (2021–2023). LiveJasmin's founder became a billionaire. Meanwhile, the average creator earns $180/month.",
+    "source": "ICIJ 2024",
+    "sourceUrl": "https://www.icij.org/news/2024/12/as-billion-dollar-webcam-industry-booms-models-suffer-at-hands-of-colombian-studios/",
+    "category": "financial"
+  },
+  {
+    "id": "trans-workers",
+    "baitLabel": "🌈 Inclusive Space",
+    "baitValue": "Everyone welcome",
+    "revealStat": "74% of trans women sex workers report lifetime suicidal ideation",
+    "revealDetail": "Among 573 trans women with a history of sex work in California, 74% reported lifetime suicidal ideation and 64% had attempted suicide.",
+    "source": "Nemoto et al. 2011",
+    "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/21493940/",
+    "category": "mental-health"
+  }
+]

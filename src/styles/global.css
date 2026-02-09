@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-dark-bg text-white font-sans;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    @apply bg-neon-pink/30 text-white;
+  }
+}
+
+@layer components {
+  .bait-state {
+    --accent: #ff2d87;
+    --accent-dim: #cc2470;
+  }
+
+  .reveal-state {
+    --accent: #666666;
+    --accent-dim: #444444;
+  }
+
+  .neon-glow {
+    box-shadow: 0 0 20px rgba(255, 45, 135, 0.3), 0 0 40px rgba(255, 45, 135, 0.1);
+  }
+
+  .neon-glow-text {
+    text-shadow: 0 0 10px rgba(255, 45, 135, 0.5), 0 0 20px rgba(255, 45, 135, 0.3);
+  }
+
+  .card-flip {
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease-in-out;
+  }
+
+  .card-flip.flipped {
+    transform: rotateY(180deg);
+  }
+
+  .card-front,
+  .card-back {
+    backface-visibility: hidden;
+    position: absolute;
+    inset: 0;
+  }
+
+  .card-back {
+    transform: rotateY(180deg);
+  }
+
+  .static-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  }
+
+  .typing-dots::after {
+    content: '...';
+    animation: typing 1.5s steps(3) infinite;
+  }
+}
+
+@layer utilities {
+  .grayscale-transition {
+    transition: filter 0.8s ease-in-out;
+  }
+
+  .font-transition {
+    transition: font-family 0.5s ease-in-out;
+  }
+}
+
+@keyframes typing {
+  0% { content: ''; }
+  25% { content: '.'; }
+  50% { content: '..'; }
+  75% { content: '...'; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
