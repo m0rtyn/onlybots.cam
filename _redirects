@@ -1,0 +1,8 @@
+# Netlify redirects for onlybots.cam
+# Redirect all routes to index.html for SPA behavior
+/*    /index.html   200
+
+# Security redirects - force HTTPS
+http://onlybots.cam/*    https://onlybots.cam/:splat    301!
+http://www.onlybots.cam/*    https://onlybots.cam/:splat    301!
+https://www.onlybots.cam/*    https://onlybots.cam/:splat    301!

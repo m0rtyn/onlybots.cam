@@ -1,0 +1,10 @@
+name = "onlybots-cam"
+compatibility_date = "2024-01-01"
+
+[env.production]
+route = { pattern = "onlybots.cam/*", zone_name = "onlybots.cam" }
+
+# Pages configuration
+[[env.production.route]]
+pattern = "onlybots.cam/*"
+zone_name = "onlybots.cam"
