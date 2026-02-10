@@ -103,29 +103,8 @@
     animation: typing 1.5s steps(3) infinite;
   }
 
-  .scroll-hint {
-    opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-    backdrop-filter: blur(8px);
-    animation: pulse-subtle 2s ease-in-out infinite;
-    /* Performance: GPU acceleration for smooth animation */
-    will-change: opacity, transform;
-  }
-
-  @keyframes pulse-subtle {
-    0%, 100% { 
-      transform: translateY(16px) scale(1); 
-    }
-    50% { 
-      transform: translateY(16px) scale(1.05); 
-    }
-  }
-
   .landing-grid {
     transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out, filter 0.8s ease-in-out;
-    /* Performance: GPU acceleration for smooth transitions */
-    will-change: opacity, transform, filter;
   }
 
   /* Reveal state - hide landing grid completely */
@@ -141,9 +120,7 @@
 
   /* Reveal sections - completely hidden in bait mode */
   .reveal-section {
-    display: none; /* Remove from layout flow in bait mode */
-    will-change: opacity, transform;
-    transform: translateZ(0); /* Force GPU layer */
+    display: none;
   }
 
   /* Show reveal sections only in reveal state */
@@ -289,16 +266,6 @@
 
   .subscribe-btn:hover, .load-more-btn:hover {
     transform: translateZ(0) scale(1.02);
-  }
-}
-
-@layer utilities {
-  .grayscale-transition {
-    transition: filter 0.8s ease-in-out;
-  }
-
-  .font-transition {
-    transition: font-family 0.5s ease-in-out;
   }
 }
 

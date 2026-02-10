@@ -15,7 +15,6 @@ interface CachedElements {
   counter: HTMLElement | null;
   typingDots: HTMLElement | null;
   revealSections: HTMLElement[];
-  scrollHint: HTMLElement | null;
 }
 
 function getCachedElements(): CachedElements {
@@ -28,7 +27,6 @@ function getCachedElements(): CachedElements {
     counter: document.querySelector<HTMLElement>('.online-counter'),
     typingDots: document.querySelector<HTMLElement>('.typing-dots'),
     revealSections: Array.from(document.querySelectorAll<HTMLElement>('.reveal-section')),
-    scrollHint: document.querySelector<HTMLElement>('.scroll-hint')
   };
 }
 
@@ -52,11 +50,9 @@ const ARIA_ANNOUNCEMENT =
  * visitors or when the user prefers reduced motion.
  */
 function applyRevealedState(): void {
-  // Performance: Cache all elements once
   const elements = getCachedElements();
-  const { body, cards, landingGrid, mainWrapper, header, counter, typingDots, revealSections, scrollHint } = elements;
+  const { body, cards, landingGrid, mainWrapper, header, counter, typingDots, revealSections } = elements;
 
-  // Performance: Add will-change hints for GPU acceleration
   body.style.willChange = 'filter';
   
   // Batch DOM updates to minimize reflows
@@ -98,12 +94,6 @@ function applyRevealedState(): void {
       setTimeout(() => el.style.willChange = 'auto', 400);
     });
 
-    // Show scroll hint instantly for returning visitors
-    if (scrollHint) {
-      scrollHint.style.opacity = '1';
-      scrollHint.style.transform = 'translateY(0)';
-    }
-
     // Header
     if (header) {
       header.style.willChange = 'opacity';
@@ -135,9 +125,6 @@ function applyRevealedState(): void {
       firstReveal.scrollIntoView({ behavior: 'instant', block: 'start' });
     }
   }, 50);
-
-  // Three.js digital cage — managed by DigitalCage's own MutationObserver
-  // (no direct DOM manipulation to avoid hydration mismatch)
 }
 
 export default function TheSwitch({ children }: TheSwitchProps) {
@@ -191,7 +178,7 @@ export default function TheSwitch({ children }: TheSwitchProps) {
 
     // Performance: Cache all DOM elements once
     const elements = getCachedElements();
-    const { body, cards, landingGrid, mainWrapper, header, counter, typingDots, revealSections, scrollHint } = elements;
+    const { body, cards, landingGrid, mainWrapper, header, counter, typingDots, revealSections } = elements;
     
     // Performance: Add will-change hints before animation
     body.style.willChange = 'filter';
@@ -266,18 +253,6 @@ export default function TheSwitch({ children }: TheSwitchProps) {
     tl.add(() => {
       body.classList.add('static-noise');
     }, 0.25);
-
-    // // T+300ms — Typing bubble text swap
-    // tl.add(() => {
-    //   if (typingDots?.parentElement) {
-    //     typingDots.parentElement.innerHTML = REVEALED_TYPING_TEXT;
-    //   }
-    // }, 0.3);
-
-    // T+350ms — Font shift
-    // tl.add(() => {
-    //   body.classList.add('font-mono');
-    // }, 0.35);
 
     // T+400ms — Header drain (faster)
     if (header) {
@@ -404,8 +379,6 @@ export default function TheSwitch({ children }: TheSwitchProps) {
       });
     }, 2.0);
 
-    // T+2500ms — Three.js cage visibility is managed by
-    // DigitalCage's own MutationObserver watching for body.reveal-state
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -565,34 +538,6 @@ export default function TheSwitch({ children }: TheSwitchProps) {
         style={{ pointerEvents: 'none' }}
         aria-hidden="true"
       />
-
-      {/* Scroll hint - appears after switch
-      <div
-        className="scroll-hint fixed bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 translate-y-4 z-30 pointer-events-none"
-        style={{ transform: 'translate(-50%, 16px)' }}
-        aria-hidden="true"
-      >
-        <div className="bg-black/80 backdrop-blur-sm border border-gray-700 rounded-lg px-4 py-3 text-center">
-          <div className="text-gray-300 text-sm mb-2 font-mono">
-            Scroll down to learn more
-          </div>
-          <div className="animate-bounce">
-            <svg
-              className="w-5 h-5 mx-auto text-gray-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 14l-7 7m0 0l-7-7m7 7V3"
-              />
-            </svg>
-          </div>
-        </div>
-      </div> */}
 
       {/* Accessibility announcement */}
       <div

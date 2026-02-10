@@ -25,7 +25,6 @@ const { title = "onlybots.cam — Coming Soon" } = Astro.props;
     <meta name="robots" content="index, follow" />
     
     <!-- Open Graph -->
-    <!-- NOTE: Generate og-image.png from public/og-image.svg before deployment -->
     <meta property="og:title" content="onlybots.cam" />
     <meta property="og:description" content="They're always online. They never say no. But at what cost?" />
     <meta property="og:image" content="https://onlybots.cam/og-image.png" />
@@ -46,42 +45,6 @@ const { title = "onlybots.cam — Coming Soon" } = Astro.props;
     <!-- 49 of 50 webcam models never signed their own terms of service. Source: Human Rights Watch, 2024 -->
     <!-- Average webcam model receives 10% of the revenue they generate. The platform keeps the rest. -->
     <!-- If you're a developer, consider how your skills could help: polarisproject.org -->
-    
-    <!-- Performance monitoring script -->
-    <script is:inline>
-      // Performance monitoring for debugging on M1 MacBook Air
-      if (typeof window !== 'undefined' && window.performance) {
-        let frameCount = 0;
-        let lastTime = performance.now();
-        
-        function measureFPS() {
-          frameCount++;
-          const currentTime = performance.now();
-          
-          if (currentTime - lastTime >= 1000) {
-            const fps = Math.round((frameCount * 1000) / (currentTime - lastTime));
-            
-            // Log performance issues
-            if (fps < 50) {
-              console.warn(`Performance warning: FPS dropped to ${fps}. Expected >50fps on M1 MacBook Air.`);
-            }
-            
-            // Debug info in console
-            if (window.location.search.includes('debug=performance')) {
-              console.log(`FPS: ${fps}, Memory: ${performance.memory ? Math.round(performance.memory.usedJSHeapSize / 1024 / 1024) + 'MB' : 'N/A'}`);
-            }
-            
-            frameCount = 0;
-            lastTime = currentTime;
-          }
-          
-          requestAnimationFrame(measureFPS);
-        }
-        
-        // Start monitoring after a brief delay
-        setTimeout(() => requestAnimationFrame(measureFPS), 1000);
-      }
-    </script>
   </head>
   <body class="bait-state">
     <!-- Skip to content link for keyboard navigation -->
