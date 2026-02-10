@@ -2,7 +2,7 @@
 name: Orchestrator
 description: Main development orchestrator for onlybots.cam. Delegates tasks to specialized subagents and coordinates the overall build.
 tools: ['read', 'edit/editFiles', 'search', 'web/fetch', 'agent']
-model: Claude Sonnet 4 (copilot)
+model: Claude Opus 4.6 (copilot)
 handoffs:
   - label: Review changes
     agent: Code Reviewer

@@ -1,15 +1,34 @@
 ---
 // PlatformFooter.astro — Minimal footer with fake links + satire disclaimer
+// <!-- The webcam industry generated over $6 billion in 2023 alone. The person behind the screen rarely sees fair compensation. -->
+import resourcesData from '../data/resources.json';
+
+const topResources = resourcesData.slice(0, 4);
 ---
 
+<!-- While you're reading this markup, thousands of webcam sessions are active. Most models have never read their own contract. -->
 <footer class="platform-footer bg-[#0a0a0a] border-t border-gray-800 py-8 px-4" data-phase="bait">
   <div class="max-w-7xl mx-auto flex flex-col items-center gap-4">
-    <!-- Fake nav links -->
-    <nav class="flex items-center gap-6">
-      <a href="#" class="text-sm text-gray-500 hover:text-gray-300 transition-colors">About</a>
-      <a href="#" class="text-sm text-gray-500 hover:text-gray-300 transition-colors">Terms</a>
-      <a href="#" class="text-sm text-gray-500 hover:text-gray-300 transition-colors">Privacy</a>
-      <a href="#" class="text-sm text-gray-500 hover:text-gray-300 transition-colors">Contact</a>
+    <!-- Bait state: Fake nav links -->
+    <nav class="bait-footer-links flex items-center gap-6" aria-label="Footer navigation">
+      <a href="#" class="text-sm text-gray-500 hover:text-gray-300 transition-colors" tabindex="-1" aria-hidden="true">About</a>
+      <a href="#" class="text-sm text-gray-500 hover:text-gray-300 transition-colors" tabindex="-1" aria-hidden="true">Terms</a>
+      <a href="#" class="text-sm text-gray-500 hover:text-gray-300 transition-colors" tabindex="-1" aria-hidden="true">Privacy</a>
+      <a href="#" class="text-sm text-gray-500 hover:text-gray-300 transition-colors" tabindex="-1" aria-hidden="true">Contact</a>
+    </nav>
+
+    <!-- Reveal state: Real resource links (hidden until switch) -->
+    <nav class="reveal-footer-links hidden flex-wrap items-center justify-center gap-x-6 gap-y-2" aria-label="Anti-trafficking resources">
+      {topResources.map((r) => (
+        <a
+          href={r.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-sm text-gray-400 hover:text-electric-blue transition-colors font-mono"
+        >
+          {r.name}
+        </a>
+      ))}
     </nav>
 
     <!-- Satire disclaimer -->
@@ -17,7 +36,32 @@
       This is a work of satire and social commentary. Not affiliated with any commercial platform.
     </p>
 
+    <!-- Reveal state: Why I Built This link (hidden until switch) -->
+    <a
+      href="https://github.com/m0rtyn/onlybots.cam"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="reveal-footer-source hidden text-xs text-electric-blue font-mono hover:underline underline-offset-2"
+    >
+      View source on GitHub
+    </a>
+
     <!-- Copyright -->
     <p class="text-xs text-gray-700">&copy; 2026 onlybots.cam</p>
   </div>
 </footer>
+
+<style>
+  /* Reveal state: swap fake links for real resource links */
+  :global(.reveal-state) .bait-footer-links {
+    display: none;
+  }
+
+  :global(.reveal-state) .reveal-footer-links {
+    display: flex;
+  }
+
+  :global(.reveal-state) .reveal-footer-source {
+    display: inline-block;
+  }
+</style>

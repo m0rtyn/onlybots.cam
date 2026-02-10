@@ -35,17 +35,18 @@ const stats = [
 ];
 ---
 
+<!-- You found the source code. While you read this, approximately 12,000 webcam sessions are active worldwide. -->
 <section class="reveal-section opacity-0 w-full min-h-screen py-24">
   <div class="inline-block w-full text-center" style="overflow: visible;">
     <h2 class="font-mono text-4xl md:text-6xl font-bold text-center mb-20 relative inline-block" style="color: #cc0000; text-shadow: 0 0 30px rgba(204, 0, 0, 0.3); overflow: visible;">
       The Real Cost
       <!-- Blood drips from heading -->
-      <span class="heading-drip" style="left:21%; width:3px; height:95px; animation-delay:0.5s; animation-duration:3.8s;" aria-hidden="true"></span>
-      <span class="heading-drip" style="left:32%; width:4px; height:115px; animation-delay:1.8s; animation-duration:4.2s;" aria-hidden="true"></span>
-      <span class="heading-drip" style="left:44%; width:3px; height:85px; animation-delay:3.0s; animation-duration:3.2s;" aria-hidden="true"></span>
-      <span class="heading-drip" style="left:58%; width:3px; height:105px; animation-delay:0.8s; animation-duration:5.0s;" aria-hidden="true"></span>
-      <span class="heading-drip" style="left:73%; width:4px; height:110px; animation-delay:1.5s; animation-duration:3.5s;" aria-hidden="true"></span>
-      <span class="heading-drip" style="left:80%; width:3px; height:120px; animation-delay:3.5s; animation-duration:4.8s;" aria-hidden="true"></span>
+      <span class="heading-drip" style="left:21%; width:3px; height:95px; animation-delay:0.5s; animation-duration:23.8s;" aria-hidden="true"></span>
+      <span class="heading-drip" style="left:32%; width:4px; height:115px; animation-delay:1.8s; animation-duration:24.2s;" aria-hidden="true"></span>
+      <span class="heading-drip" style="left:44%; width:3px; height:85px; animation-delay:3.0s; animation-duration:23.2s;" aria-hidden="true"></span>
+      <span class="heading-drip" style="left:58%; width:3px; height:105px; animation-delay:0.8s; animation-duration:25.0s;" aria-hidden="true"></span>
+      <span class="heading-drip" style="left:73%; width:4px; height:110px; animation-delay:1.5s; animation-duration:23.5s;" aria-hidden="true"></span>
+      <span class="heading-drip" style="left:80%; width:3px; height:120px; animation-delay:3.5s; animation-duration:24.8s;" aria-hidden="true"></span>
     </h2>
   </div>
 
@@ -103,16 +104,16 @@ const stats = [
     display: block;
     animation-name: headingDrip;
     animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
+    animation-iteration-count: 1;
+    animation-fill-mode: backwards;
   }
 
   @keyframes headingDrip {
-    0%   { opacity: 0; transform: translateY(-10px) translateX(0) scaleY(0); }
-    5%   { opacity: 0.3; transform: translateY(-5px) translateX(0) scaleY(0.2); }
-    15%  { opacity: 0.9; transform: translateY(0) translateX(-1px) scaleY(0.6); }
-    35%  { opacity: 0.95; transform: translateY(10px) translateX(1px) scaleY(1); }
-    60%  { opacity: 0.8; transform: translateY(40px) translateX(-0.5px) scaleY(1.1); }
-    80%  { opacity: 0.4; transform: translateY(80px) translateX(0.5px) scaleY(0.8); }
-    100% { opacity: 0; transform: translateY(120px) translateX(0) scaleY(0.3); }
+    0%   { opacity: 0; transform: scaleY(0); }
+    5%   { opacity: 0.3; transform: scaleY(0.2); }
+    15%  { opacity: 0.9; transform: scaleY(0.6); }
+    60%  { opacity: 0.8; transform: scaleY(1.1); }
+    65%  { opacity: 0.8; transform: scaleY(0.95); }
+    100% { opacity: 1; transform: scaleY(1); }
   }
 </style>

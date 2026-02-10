@@ -2,7 +2,7 @@
 name: Content Editor
 description: Manages data files (statistics, testimonies, resources), verifies source URLs, and ensures all content is properly sourced from RESEARCH.md.
 tools: ['read', 'edit/editFiles', 'search', 'web/fetch']
-model: Claude Sonnet 4 (copilot)
+model: Claude Opus 4.6 (copilot)
 handoffs:
   - label: Verify sources
     agent: Content Editor

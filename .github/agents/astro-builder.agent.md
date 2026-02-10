@@ -2,7 +2,7 @@
 name: Astro Builder
 description: Builds and edits Astro components (.astro files) for onlybots.cam — static layouts, ProfileCards, reveal sections, headers, footers.
 tools: ['read', 'edit/editFiles', 'search', 'web/fetch']
-model: Claude Sonnet 4 (copilot)
+model: Claude Opus 4.6 (copilot)
 handoffs:
   - label: Style it
     agent: Stylist

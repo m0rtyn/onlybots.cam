@@ -2,7 +2,7 @@
 name: GSAP Animator
 description: Specializes in GSAP timeline animations, ScrollTrigger, and the dramatic bait-to-reveal switch transition.
 tools: ['read', 'edit/editFiles', 'search']
-model: Claude Sonnet 4 (copilot)
+model: Claude Opus 4.6 (copilot)
 handoffs:
   - label: Review animation
     agent: Code Reviewer

@@ -14,17 +14,19 @@ import PlatformFooter from '../components/PlatformFooter.astro';
 <Layout>
   <TheSwitch client:load>
     <PlatformHeader />
-    <main class="bait-content min-h-screen flex flex-col">
+    <main id="main-content" class="bait-content min-h-screen flex flex-col">
       <LandingGrid />
     </main>
   </TheSwitch>
 
   <!-- Reveal sections (hidden until switch, animated in by TheSwitch via .reveal-section DOM queries) -->
-  <TheRealCost />
-  <BehindTheScreen />
-  <TheMachine />
-  <WhatYouCanDo />
-  <WhyIBuiltThis />
+  <div id="reveal-content" role="region" aria-label="Revealed content about the webcam industry">
+    <TheRealCost />
+    <BehindTheScreen />
+    <TheMachine />
+    <WhatYouCanDo />
+    <WhyIBuiltThis />
+  </div>
 
   <PlatformFooter />
 </Layout>

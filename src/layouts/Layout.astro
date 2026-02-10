@@ -21,13 +21,19 @@ const { title = "onlybots.cam — Coming Soon" } = Astro.props;
     <!-- SEO -->
     <title>{title}</title>
     <meta name="description" content="onlybots.cam — They're always online. They never say no. But someone always pays the price." />
+    <link rel="canonical" href="https://onlybots.cam" />
+    <meta name="robots" content="index, follow" />
     
     <!-- Open Graph -->
+    <!-- NOTE: Generate og-image.png from public/og-image.svg before deployment -->
     <meta property="og:title" content="onlybots.cam" />
     <meta property="og:description" content="They're always online. They never say no. But at what cost?" />
     <meta property="og:image" content="https://onlybots.cam/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:url" content="https://onlybots.cam" />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="onlybots.cam" />
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -78,6 +84,8 @@ const { title = "onlybots.cam — Coming Soon" } = Astro.props;
     </script>
   </head>
   <body class="bait-state">
+    <!-- Skip to content link for keyboard navigation -->
+    <a href="#main-content" class="skip-to-content">Skip to content</a>
     <slot />
   </body>
 </html>

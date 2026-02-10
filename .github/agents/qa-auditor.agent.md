@@ -2,7 +2,7 @@
 name: QA Auditor
 description: Runs accessibility audits, performance checks, Lighthouse analysis, keyboard navigation testing, and screen reader compatibility.
 tools: ['read', 'search', 'web/fetch', 'search/changes']
-model: Claude Sonnet 4 (copilot)
+model: Claude Opus 4.6 (copilot)
 handoffs:
   - label: Fix issues
     agent: Astro Builder

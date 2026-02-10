@@ -2,7 +2,7 @@
 name: Code Reviewer
 description: Reviews code changes against SPEC.md and PLAN.md requirements. Checks for architecture violations, missing sources, and style consistency.
 tools: ['read', 'search', 'search/changes']
-model: Claude Sonnet 4 (copilot)
+model: Claude Opus 4.6 (copilot)
 ---
 
 # Code Reviewer Agent

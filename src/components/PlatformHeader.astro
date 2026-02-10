@@ -12,11 +12,13 @@
         <span class="logo-accent text-xl font-bold text-neon-pink neon-glow-text">.cam</span>
         <!-- Blood drip elements -->
         <!-- Blood drip elements -->
-        <span class="logo-drip" style="top: 17px; left:9.3%; width:2px; height:85px; animation-delay:0.8s; animation-duration:3.5s;" aria-hidden="true"></span> 
-        <span class="logo-drip" style="top: 17px; left:34.1%; width:3px; height:110px; animation-delay:2.0s; animation-duration:4.5s;" aria-hidden="true"></span> 
-        <span class="logo-drip" style="top: 17.8px; left:55.1%; width:2px; height:95px; animation-delay:3.2s; animation-duration:3.0s;" aria-hidden="true"></span> 
-        <span class="logo-drip" style="top: 17.4px; left:69.3%; width:2px; height:45.5px; animation-delay:1.2s; animation-duration:5.0s;" aria-hidden="true"></span> 
-        <span class="logo-drip" style="top: 17px; left:88.9%; width:2px; height:120px; animation-delay:2.8s; animation-duration:4.0s;" aria-hidden="true"></span>
+
+        
+        <span class="logo-drip" style="top: 20.3px; left:10.3%; width:2px; height:85px; animation-delay:0.8s; animation-duration:13.5s;" aria-hidden="true" data-astro-cid-q4lfii2b=""></span> 
+        <span class="logo-drip" style="top: 19px; left:34.9%; width:3px; height:110px; animation-delay:2.0s; animation-duration:14.5s;" aria-hidden="true" data-astro-cid-q4lfii2b=""></span> 
+        <span class="logo-drip" style="top: 17.8px; left:55.7%; width:2px; height:95px; animation-delay:3.2s; animation-duration:13.0s;" aria-hidden="true" data-astro-cid-q4lfii2b=""></span> 
+        <span class="logo-drip" style="top: 20.4px; left:71.2%; width:2px; height:45.5px; animation-delay:1.2s; animation-duration:15.0s;" aria-hidden="true" data-astro-cid-q4lfii2b=""></span> 
+        <span class="logo-drip" style="top: 17px; left:87.3%; width:2px; height:120px; animation-delay:2.8s; animation-duration:14.0s;" aria-hidden="true" data-astro-cid-q4lfii2b=""></span> </a>
       </a>
     </div>
 
@@ -31,6 +33,7 @@
           placeholder="Search models..."
           class="w-full bg-dark-surface text-sm text-gray-300 placeholder-gray-500 rounded-full pl-10 pr-4 py-2 border border-gray-700/50 focus:outline-none focus:border-neon-pink/40 cursor-not-allowed"
           disabled
+          aria-label="Search models (decorative, non-functional)"
         />
       </div>
     </div>
@@ -38,7 +41,7 @@
     <!-- Right: Notification bell + avatar -->
     <div class="flex items-center gap-4 shrink-0">
       <!-- Notification bell -->
-      <button class="relative text-gray-400 hover:text-white transition-colors cursor-default" aria-label="Notifications">
+      <button class="relative text-gray-400 hover:text-white transition-colors cursor-default" aria-label="Notifications (decorative)" aria-hidden="true" tabindex="-1">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
         </svg>
@@ -47,14 +50,14 @@
       </button>
 
       <!-- Fake user avatar -->
-      <div class="w-8 h-8 rounded-full bg-gradient-to-br from-neon-pink to-purple-600 flex items-center justify-center text-white text-xs font-bold ring-2 ring-gray-700 cursor-default">
+      <div class="w-8 h-8 rounded-full bg-gradient-to-br from-neon-pink to-purple-600 flex items-center justify-center text-white text-xs font-bold ring-2 ring-gray-700 cursor-default" aria-hidden="true">
         U
       </div>
     </div>
   </div>
 
   <!-- Secondary nav: category links -->
-  <nav class="max-w-7xl mx-auto px-4 pb-2 flex items-center gap-6 overflow-x-auto scrollbar-hide">
+  <nav class="max-w-7xl mx-auto px-4 pb-2 flex items-center gap-6 overflow-x-auto scrollbar-hide" aria-label="Category navigation (decorative)" aria-hidden="true">
     <a href="#" class="text-sm text-gray-400 hover:text-neon-pink transition-colors whitespace-nowrap font-medium">
       Explore
     </a>
@@ -95,16 +98,17 @@
     display: block;
     animation-name: logoDrip;
     animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
   }
 
   @keyframes logoDrip {
-    0%   { opacity: 0; transform: translateY(-10px) translateX(0) scaleY(0); }
-    5%   { opacity: 0.3; transform: translateY(-5px) translateX(0) scaleY(0.2); }
-    15%  { opacity: 0.9; transform: translateY(0) translateX(-1px) scaleY(0.6); }
-    35%  { opacity: 0.95; transform: translateY(10px) translateX(1px) scaleY(1); }
-    60%  { opacity: 0.8; transform: translateY(40px) translateX(-0.5px) scaleY(1.1); }
-    80%  { opacity: 0.4; transform: translateY(80px) translateX(0.5px) scaleY(0.8); }
-    100% { opacity: 0; transform: translateY(120px) translateX(0) scaleY(0.3); }
+    0%   { opacity: 0; transform:  scaleY(0); }
+    5%   { opacity: 0.3; transform: scaleY(0.2); }
+    15%  { opacity: 0.9; transform:  scaleY(0.6); }
+    35%  { opacity: 0.95; transform: scaleY(1); }
+    60%  { opacity: 0.8; transform: scaleY(1.1); }
+    80%  { opacity: 0.8; transform: scaleY(0.8); }
+    100% { opacity: 1; transform: scaleY(0.3); }
   }
 </style>

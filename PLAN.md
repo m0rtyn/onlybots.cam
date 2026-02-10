@@ -7,52 +7,81 @@
 
 ## 🚀 **PROJECT STATUS UPDATE (Feb 10, 2026)**
 
-### ✅ **COMPLETED PHASES (1-6)**
+### ✅ **COMPLETED PHASES (1–3, 6)**
 
 **Phase 1 — Project Scaffold:** ✅ **COMPLETE**
-- ✅ Task 1.1: Astro + Tailwind + React + Three.js project fully configured
+- ✅ Task 1.1: Astro 5 + Tailwind 3 + React 19 + GSAP project fully configured
 - ✅ Task 1.2: All data files created with sourced statistics, testimonies, and resources
 
-**Phase 2 — Landing Page:** ✅ **COMPLETE** 
-- ✅ Task 2.1: ProfileCard component built with bait/reveal dual faces and proper CSS fixed height
-- ✅ Task 2.2: LandingGrid component with 8 model cards and platform chrome
-- ✅ Task 2.3: PlatformHeader and PlatformFooter components with fake UI elements
+**Phase 2 — Landing Page:** ✅ **COMPLETE**
+- ✅ Task 2.1: ProfileCard component with bait/reveal dual faces, fixed-height CSS, `data-stat-id` linking
+- ✅ Task 2.2: LandingGrid with 8 model cards, responsive grid, platform chrome (counter, typing dots, Load More)
+- ✅ Task 2.3: PlatformHeader (sticky nav, fake search, notifications) and PlatformFooter (satire disclaimer, resource links)
 
 **Phase 3 — The Switch:** ✅ **COMPLETE**
-- ✅ Task 3.1: TheSwitch.tsx React island with optimized GSAP timeline and auto-scroll UX
-- ✅ Task 3.2: StatCard functionality integrated into ProfileCard back face
-- ✅ Task 3.3: All reveal content sections built and animating
+- ✅ Task 3.1: TheSwitch.tsx — GSAP timeline, sessionStorage persistence, debug mode (`?debug=1`), `prefers-reduced-motion` shortcut, stale-closure-safe event delegation via `phaseRef`
+- ✅ Task 3.2: StatCard integrated directly into ProfileCard back face (no separate component)
+- ✅ Task 3.3: All 5 reveal content sections built (TheRealCost, BehindTheScreen, TheMachine, WhatYouCanDo, WhyIBuiltThis)
 
 **Phase 4 — Three.js Scene:** ❌ **REMOVED**
-- ❌ Task 4.1: DigitalCage component removed per user feedback
+- ❌ Task 4.1: DigitalCage removed per user feedback (file still on disk but unused)
 
 **Phase 6 — Assembly:** ✅ **COMPLETE**
-- ✅ Task 6.1: index.astro assembled with all components and working flow
+- ✅ Task 6.1: index.astro assembled with all components, TheSwitch wraps bait content, reveal sections in `#reveal-content` region
 
-### 🔄 **REMAINING TASKS (Phase 5 & 7)**
+### ⏳ **PHASE 5 — SEO & Polish: MOSTLY COMPLETE**
 
-**Phase 5 — SEO & Polish:** ⏳ **PENDING**
-- ⏳ Task 5.1: SEO and Open Graph tags (partially complete)
-- ⏳ Task 5.2: Accessibility audit and performance optimization  
-- ⏳ Task 5.3: HTML source code Easter eggs
+**Task 5.1 — SEO and Open Graph tags:** ⏳ **PARTIAL**
+- ✅ `<title>`, `<meta description>`, `<link rel="canonical">`, `<meta name="robots">`
+- ✅ Full OG tags (title, description, image, url, type, site_name) and Twitter Card tags
+- ✅ `robots.txt` with sitemap reference and Easter egg comment
+- ⚠️ **`og-image.png` missing** — only `public/og-image.svg` exists; OG/Twitter tags reference `.png`
+- ⚠️ **No `sitemap.xml`** — `robots.txt` references it but no sitemap generator is configured
 
-**Phase 7 — Deployment:** ⏳ **PENDING**
-- ⏳ Task 7.1: Deploy to hosting platform
-- ⏳ Task 7.2: Add privacy-respecting analytics
+**Task 5.2 — Accessibility and performance:** ⏳ **PARTIAL**
+- ✅ `prefers-reduced-motion` respected in CSS (kills animations) and JS (skips GSAP, shows reveal directly)
+- ✅ `focus-visible` custom styles for `.subscribe-btn`, `.load-more-btn`, buttons, links
+- ✅ Skip-to-content link in Layout.astro, styled in global.css
+- ✅ `aria-live="polite"` region announces "Content has changed" during switch
+- ✅ Keyboard navigation — Enter/Space on trigger elements fires the switch
+- ✅ All external links have `target="_blank"` + `rel="noopener noreferrer"`
+- ✅ Decorative elements marked `aria-hidden="true"` / `tabindex="-1"` in PlatformHeader
+- ⚠️ **No Lighthouse audit run** — no performance benchmarks recorded
+- ⚠️ **Bundle bloat** — Three.js + R3F + Drei still in dependencies despite DigitalCage being unused
 
-### 📊 **CURRENT STATUS: ~90% Complete**
+**Task 5.3 — HTML source code Easter eggs:** ✅ **COMPLETE**
+- ✅ Easter egg HTML comments in LandingGrid, ProfileCard, TheRealCost, BehindTheScreen, TheMachine, WhatYouCanDo, PlatformFooter
+- ✅ `robots.txt` Easter egg comment
 
-**✅ CORE FUNCTIONALITY FULLY WORKING:**
-- Complete bait-to-reveal transition with optimized performance
-- All ProfileCard content displaying correctly with fixed height CSS  
-- Smooth GSAP animations with auto-scroll to reveal content
-- All sourced statistics and content sections functional
-- Debug mode (`?debug=1`) for testing
+### ❌ **PHASE 7 — Deployment: NOT STARTED**
+
+- ❌ Task 7.1: No deployment config (no `vercel.json`, `wrangler.toml`, `netlify.toml`, no CI/CD)
+- ❌ Task 7.2: No analytics (no Plausible/Umami script, no custom event tracking)
+
+### 📊 **CURRENT STATUS: ~93% Complete**
+
+**✅ FULLY WORKING:**
+- Complete bait → reveal transition with optimized GSAP timeline
+- ProfileCard flip animation with Safari-compatible pointer-events handling
+- Stale-closure-safe event delegation (phaseRef pattern)
+- sessionStorage persistence with debug mode reset
+- `prefers-reduced-motion` support (CSS + JS)
+- Accessibility: skip-to-content, focus-visible, aria-live, keyboard nav
+- All sourced statistics, testimonies, and resource links
+- HTML Easter eggs throughout source
+
+**⚠️ KNOWN ISSUES:**
+1. `og-image.png` not generated from SVG source — social sharing cards won't display correctly
+2. Three.js deps (`three`, `@react-three/fiber`, `@react-three/drei`) inflate `node_modules` — should be removed since DigitalCage is unused
+3. Scroll hint JSX in TheSwitch.tsx is commented out — CSS references `.scroll-hint` but it never renders
+4. No `sitemap.xml` generator configured
 
 **🎯 NEXT PRIORITIES:**
-1. SEO/OG optimization for viral sharing
-2. Final accessibility audit
-3. Production deployment setup
+1. Generate `og-image.png` from `og-image.svg` (or replace with a designed PNG)
+2. Remove unused Three.js dependencies and `DigitalCage.tsx`
+3. Run Lighthouse audit, fix any issues, target 95+ on all metrics
+4. Deploy to Vercel/Cloudflare Pages with custom domain `onlybots.cam`
+5. Add privacy-respecting analytics (Plausible or Umami)
 
 ---
 

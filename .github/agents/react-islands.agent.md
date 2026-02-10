@@ -2,7 +2,7 @@
 name: React Islands
 description: Builds and maintains React interactive islands — TheSwitch.tsx state machine and DigitalCage.tsx Three.js scene.
 tools: ['read', 'edit/editFiles', 'search', 'web/fetch']
-model: Claude Sonnet 4 (copilot)
+model: Claude Opus 4.6 (copilot)
 handoffs:
   - label: Animate with GSAP
     agent: GSAP Animator

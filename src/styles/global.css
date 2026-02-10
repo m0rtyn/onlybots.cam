@@ -62,17 +62,31 @@
   .card-front,
   .card-back {
     backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    /* Clip individually — overflow:hidden on parent breaks preserve-3d in Safari */
+    border-radius: 0.75rem;
+    overflow: hidden;
     /* Performance: Force GPU layer */
     transform: translateZ(0);
   }
 
   .card-back {
     transform: rotateY(180deg);
+    /* Prevent invisible back face from intercepting clicks (Safari bug) */
+    pointer-events: none;
+  }
+
+  .card-flip.flipped .card-back {
+    pointer-events: auto;
+  }
+
+  .card-flip.flipped .card-front {
+    pointer-events: none;
   }
 
   /* Ensure card front is visible by default */
@@ -251,10 +265,10 @@
 
   @keyframes logo-glitch {
     0%, 90%, 100% { transform: translate(0); }
-    92% { transform: translate(-2px, 1px); }
-    94% { transform: translate(2px, -1px); }
-    96% { transform: translate(-1px, -1px); }
-    98% { transform: translate(1px, 0); }
+    92% { transform: translate(-1px, 0.5px); }
+    94% { transform: translate(1px, -0.5px); }
+    96% { transform: translate(-0.5px, -0.5px); }
+    98% { transform: translate(0.5px, 0); }
   }
 
   @keyframes logo-accent-flicker {
@@ -303,4 +317,50 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+
+  /* Disable blood drip animations */
+  .logo-drip,
+  .heading-drip {
+    display: none !important;
+  }
+
+  /* Disable vignette pulse */
+  body.reveal-state::after {
+    animation: none !important;
+    opacity: 0.7;
+  }
+}
+
+/* Skip to content link — visible on focus for keyboard users */
+.skip-to-content {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  background: #0a0a0a;
+  color: #00a2ff;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid #00a2ff;
+  border-radius: 0.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.skip-to-content:focus {
+  top: 1rem;
+  outline: none;
+}
+
+/* Focus-visible styles for interactive elements */
+.subscribe-btn:focus-visible,
+.load-more-btn:focus-visible,
+[data-trigger-switch]:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #00a2ff;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(0, 162, 255, 0.25);
 }

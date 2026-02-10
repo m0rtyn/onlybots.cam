@@ -1,19 +1,12 @@
 {
-  "name": "onlybots-cam",
+  "name": "onlybots.cam",
   "type": "module",
   "version": "0.0.1",
-  "description": "A satirical art-activism website revealing the brutal reality behind the webcam industry",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro",
-    "build:check": "astro check && astro build",
-    "preview:prod": "npm run build && astro preview",
-    "deploy:vercel": "vercel --prod",
-    "deploy:netlify": "netlify deploy --prod --dir=dist",
-    "clean": "rm -rf dist",
-    "test:build": "npm run clean && npm run build && npm run preview"
+    "astro": "astro"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",

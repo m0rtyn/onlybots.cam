@@ -2,7 +2,7 @@
 name: Stylist
 description: Handles Tailwind CSS styling, global CSS, dark theme design tokens, and visual polish for onlybots.cam.
 tools: ['read', 'edit/editFiles', 'search']
-model: Claude Sonnet 4 (copilot)
+model: Claude Opus 4.6 (copilot)
 ---
 
 # Stylist Agent

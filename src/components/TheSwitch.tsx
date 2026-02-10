@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState, useMemo } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 
@@ -142,17 +142,24 @@ function applyRevealedState(): void {
 
 export default function TheSwitch({ children }: TheSwitchProps) {
   const [phase, setPhase] = useState<Phase>('bait');
+  const phaseRef = useRef<Phase>('bait');
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
   const flashRef = useRef<HTMLDivElement>(null);
   const [announced, setAnnounced] = useState(false);
+
+  // Keep ref in sync so event handlers always read the latest phase
+  useEffect(() => {
+    phaseRef.current = phase;
+  }, [phase]);
 
   // ---------------------------------------------------------------
   // The core switch animation — GSAP timeline
   // ---------------------------------------------------------------
   const triggerSwitch = useCallback(() => {
-    // Guard: only trigger once
-    if (phase !== 'bait') return;
+    // Guard: only trigger once — read from ref, not stale closure
+    if (phaseRef.current !== 'bait') return;
     setPhase('switching');
+    phaseRef.current = 'switching';
 
     // Reduced-motion shortcut
     const prefersReducedMotion = window.matchMedia(
@@ -161,6 +168,7 @@ export default function TheSwitch({ children }: TheSwitchProps) {
 
     if (prefersReducedMotion) {
       applyRevealedState();
+      phaseRef.current = 'revealed';
       setPhase('revealed');
       setAnnounced(true);
       try {
@@ -173,6 +181,7 @@ export default function TheSwitch({ children }: TheSwitchProps) {
 
     const tl = gsap.timeline({
       onComplete: () => {
+        phaseRef.current = 'revealed';
         setPhase('revealed');
         setAnnounced(true);
       },
@@ -258,17 +267,17 @@ export default function TheSwitch({ children }: TheSwitchProps) {
       body.classList.add('static-noise');
     }, 0.25);
 
-    // T+300ms — Typing bubble text swap
-    tl.add(() => {
-      if (typingDots?.parentElement) {
-        typingDots.parentElement.innerHTML = REVEALED_TYPING_TEXT;
-      }
-    }, 0.3);
+    // // T+300ms — Typing bubble text swap
+    // tl.add(() => {
+    //   if (typingDots?.parentElement) {
+    //     typingDots.parentElement.innerHTML = REVEALED_TYPING_TEXT;
+    //   }
+    // }, 0.3);
 
     // T+350ms — Font shift
-    tl.add(() => {
-      body.classList.add('font-mono');
-    }, 0.35);
+    // tl.add(() => {
+    //   body.classList.add('font-mono');
+    // }, 0.35);
 
     // T+400ms — Header drain (faster)
     if (header) {
@@ -384,43 +393,6 @@ export default function TheSwitch({ children }: TheSwitchProps) {
       1.0,
     );
 
-    // T+1200ms — Show scroll hint
-    tl.add(() => {
-      if (scrollHint) {
-        gsap.to(scrollHint, {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          ease: 'power2.out',
-        });
-        const hideScrollHint = () => {
-          gsap.to(scrollHint, {
-            opacity: 0,
-            y: 16,
-            duration: 0.3,
-            ease: 'power2.in',
-          });
-        };
-        setTimeout(hideScrollHint, 4000);
-        window.addEventListener('scroll', hideScrollHint, { once: true, passive: true });
-      }
-    }, 1.2);
-
-    // T+1300ms — Auto scroll to first reveal section
-    tl.add(() => {
-      const firstRevealSection = revealSections[0];
-      if (firstRevealSection) {
-        gsap.to(window, {
-          scrollTo: {
-            y: firstRevealSection,
-            offsetY: 40,
-          },
-          duration: 1.2,
-          ease: 'power3.inOut',
-        });
-      }
-    }, 1.3);
-
     // T+2000ms — Clean up will-change properties for performance
     tl.add(() => {
       requestAnimationFrame(() => {
@@ -434,15 +406,69 @@ export default function TheSwitch({ children }: TheSwitchProps) {
 
     // T+2500ms — Three.js cage visibility is managed by
     // DigitalCage's own MutationObserver watching for body.reveal-state
-  }, [phase]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // ---------------------------------------------------------------
   // Mount: check session, attach event listeners
   // ---------------------------------------------------------------
   useEffect(() => {
-    // Debug mode: ignore sessionStorage
+    // Debug mode: ignore sessionStorage and clear it so page resets to bait
     const urlParams = new URLSearchParams(window.location.search);
     const isDebugMode = urlParams.get('debug') === '1';
+    
+    if (isDebugMode) {
+      try {
+        sessionStorage.removeItem(STORAGE_KEY);
+      } catch {
+        /* private browsing */
+      }
+      // Reset DOM to bait state in case it was previously revealed
+      const body = document.body;
+      body.classList.remove('reveal-state', 'static-noise', 'font-mono');
+      body.classList.add('bait-state');
+      body.style.filter = '';
+      
+      // Reset bait content visibility
+      const mainWrapper = document.querySelector<HTMLElement>('.bait-content');
+      if (mainWrapper) {
+        mainWrapper.style.display = '';
+        mainWrapper.style.minHeight = '';
+        mainWrapper.style.overflow = '';
+        mainWrapper.style.height = '';
+        mainWrapper.style.padding = '';
+        mainWrapper.style.margin = '';
+      }
+      
+      // Reset landing grid
+      const landingGrid = document.querySelector<HTMLElement>('.landing-grid');
+      if (landingGrid) {
+        landingGrid.style.opacity = '';
+        landingGrid.style.transform = '';
+        landingGrid.style.filter = '';
+      }
+      
+      // Reset header
+      const header = document.querySelector<HTMLElement>('.platform-header');
+      if (header) {
+        header.style.opacity = '';
+      }
+      
+      // Unflip cards
+      document.querySelectorAll<HTMLElement>('.card-flip').forEach((card) => {
+        card.classList.remove('flipped');
+      });
+      
+      // Hide reveal sections
+      document.querySelectorAll<HTMLElement>('.reveal-section').forEach((el) => {
+        el.style.display = '';
+        el.style.opacity = '0';
+        el.style.transform = '';
+      });
+      
+      // Reset document title
+      document.title = 'onlybots.cam — Coming Soon';
+    }
     
     // Returning visitor → skip straight to revealed (unless debug mode)
     let alreadySwitched = false;
@@ -461,7 +487,7 @@ export default function TheSwitch({ children }: TheSwitchProps) {
       return;
     }
 
-    // Event delegation handler - optimized to avoid closure deps and reduce delay
+    // Event delegation handler — reads phaseRef (always current, no stale closure)
     const handleClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
       if (!target) return;
@@ -471,7 +497,25 @@ export default function TheSwitch({ children }: TheSwitchProps) {
         target.closest('.load-more-btn') !== null ||
         target.closest('[data-trigger-switch]') !== null;
 
-      if (isTrigger && phase === 'bait') {
+      if (isTrigger && phaseRef.current === 'bait') {
+        e.preventDefault();
+        e.stopPropagation();
+        triggerSwitch();
+      }
+    };
+
+    // Keyboard handler — Enter or Space on trigger elements
+    const handleKeydown = (e: KeyboardEvent) => {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
+
+      const isTrigger =
+        target.closest('.subscribe-btn') !== null ||
+        target.closest('.load-more-btn') !== null ||
+        target.closest('[data-trigger-switch]') !== null;
+
+      if (isTrigger && phaseRef.current === 'bait') {
         e.preventDefault();
         e.stopPropagation();
         triggerSwitch();
@@ -491,9 +535,11 @@ export default function TheSwitch({ children }: TheSwitchProps) {
     observer.observe(document.body, { childList: true, subtree: true });
 
     document.addEventListener('click', handleClick, true);
+    document.addEventListener('keydown', handleKeydown, true);
 
     return () => {
       document.removeEventListener('click', handleClick, true);
+      document.removeEventListener('keydown', handleKeydown, true);
       observer.disconnect();
       // Kill any running timeline on unmount
       if (timelineRef.current) {
@@ -501,7 +547,9 @@ export default function TheSwitch({ children }: TheSwitchProps) {
         timelineRef.current = null;
       }
     };
-  }, [triggerSwitch, phase]);
+    // Register once on mount — handlers read phaseRef (always current)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // ---------------------------------------------------------------
   // Render
