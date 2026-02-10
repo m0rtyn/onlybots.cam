@@ -2,6 +2,7 @@
 const stats = [
   {
     number: "41.8%",
+    color: "#cc0000",
     description: "Depression rate among sex workers",
     detail: "Systematic review of 68 papers covering 24,940 participants found depression prevalence of 41.8%, anxiety at 21%, and PTSD at 19.7%.",
     source: "Beattie et al. 2020",
@@ -9,6 +10,7 @@ const stats = [
   },
   {
     number: "48%",
+    color: "#dc143c",
     description: "Lifetime suicidality among sex workers",
     detail: "In a Vancouver study of 867 women sex workers, 46% reported lifetime suicidal ideation and 33% had attempted suicide.",
     source: "Argento et al. 2019",
@@ -16,6 +18,7 @@ const stats = [
   },
   {
     number: "$1B",
+    color: "#ff4500",
     description: "In dividends to one platform owner. Average creator earns $180/month.",
     detail: "OnlyFans owner earned $1 billion in dividends between 2021–2023. Meanwhile, 73% of total revenue comes from just the top 10% of creators.",
     source: "ICIJ 2024",
@@ -23,6 +26,7 @@ const stats = [
   },
   {
     number: "65%",
+    color: "#ff0000",
     description: "Reported rape in pornography production",
     detail: "A 2025 Nordic study of individuals filmed for pornography found 87% experienced verbal abuse, 65% reported rape, and 56% suffered physical assault.",
     source: "Donevan 2025",
@@ -32,14 +36,26 @@ const stats = [
 ---
 
 <section class="reveal-section opacity-0 w-full min-h-screen py-24">
-  <h2 class="font-mono text-4xl md:text-6xl font-bold text-white text-center mb-20">
-    The Real Cost
-  </h2>
+  <div class="inline-block w-full text-center" style="overflow: visible;">
+    <h2 class="font-mono text-4xl md:text-6xl font-bold text-center mb-20 relative inline-block" style="color: #cc0000; text-shadow: 0 0 30px rgba(204, 0, 0, 0.3); overflow: visible;">
+      The Real Cost
+      <!-- Blood drips from heading -->
+      <span class="heading-drip" style="left:21%; width:3px; height:95px; animation-delay:0.5s; animation-duration:3.8s;" aria-hidden="true"></span>
+      <span class="heading-drip" style="left:32%; width:4px; height:115px; animation-delay:1.8s; animation-duration:4.2s;" aria-hidden="true"></span>
+      <span class="heading-drip" style="left:44%; width:3px; height:85px; animation-delay:3.0s; animation-duration:3.2s;" aria-hidden="true"></span>
+      <span class="heading-drip" style="left:58%; width:3px; height:105px; animation-delay:0.8s; animation-duration:5.0s;" aria-hidden="true"></span>
+      <span class="heading-drip" style="left:73%; width:4px; height:110px; animation-delay:1.5s; animation-duration:3.5s;" aria-hidden="true"></span>
+      <span class="heading-drip" style="left:80%; width:3px; height:120px; animation-delay:3.5s; animation-duration:4.8s;" aria-hidden="true"></span>
+    </h2>
+  </div>
 
   <div class="flex flex-col items-center">
     {stats.map((stat) => (
       <div class="py-32 flex flex-col items-center justify-center text-center max-w-4xl mx-auto px-6">
-        <span class="text-7xl md:text-9xl font-mono font-bold text-white leading-none">
+        <span
+          class="stat-number text-7xl md:text-9xl font-mono font-bold leading-none"
+          style={`color: ${stat.color}; text-shadow: 0 0 40px ${stat.color}44, 0 0 80px ${stat.color}22;`}
+        >
           {stat.number}
         </span>
         <p class="text-xl md:text-2xl text-gray-400 font-mono mt-4 max-w-2xl">
@@ -60,3 +76,43 @@ const stats = [
     ))}
   </div>
 </section>
+
+<style>
+  .heading-drip {
+    position: absolute;
+    top: 80%;
+    background: linear-gradient(180deg, 
+      #cc0000 0%,     /* bright red at top */
+      #cc0000 3%,     /* bright red at top */
+      #991b1b 30%,    /* darker red */
+      #7f1d1d 70%,    /* very dark red */
+      #450a0a 90%,    /* almost black */
+      transparent 100%
+    );
+    border-radius: 0 0 100% 100%;  /* more teardrop */
+    box-shadow: 
+      0px 0px 4px rgba(220, 38, 38, 0.6),
+      inset 0 0px 6px rgba(0, 0, 0, 0.03);
+    pointer-events: none;
+    z-index: 10;
+    display: none;
+    transform-origin: top center;
+  }
+
+  :global(.reveal-state) .heading-drip {
+    display: block;
+    animation-name: headingDrip;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes headingDrip {
+    0%   { opacity: 0; transform: translateY(-10px) translateX(0) scaleY(0); }
+    5%   { opacity: 0.3; transform: translateY(-5px) translateX(0) scaleY(0.2); }
+    15%  { opacity: 0.9; transform: translateY(0) translateX(-1px) scaleY(0.6); }
+    35%  { opacity: 0.95; transform: translateY(10px) translateX(1px) scaleY(1); }
+    60%  { opacity: 0.8; transform: translateY(40px) translateX(-0.5px) scaleY(1.1); }
+    80%  { opacity: 0.4; transform: translateY(80px) translateX(0.5px) scaleY(0.8); }
+    100% { opacity: 0; transform: translateY(120px) translateX(0) scaleY(0.3); }
+  }
+</style>

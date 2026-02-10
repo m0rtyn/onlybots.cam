@@ -3,7 +3,6 @@ import Layout from '../layouts/Layout.astro';
 import PlatformHeader from '../components/PlatformHeader.astro';
 import LandingGrid from '../components/LandingGrid.astro';
 import TheSwitch from '../components/TheSwitch';
-import DigitalCage from '../components/DigitalCage';
 import TheRealCost from '../components/TheRealCost.astro';
 import BehindTheScreen from '../components/BehindTheScreen.astro';
 import TheMachine from '../components/TheMachine.astro';
@@ -15,7 +14,7 @@ import PlatformFooter from '../components/PlatformFooter.astro';
 <Layout>
   <TheSwitch client:load>
     <PlatformHeader />
-    <main>
+    <main class="bait-content min-h-screen flex flex-col">
       <LandingGrid />
     </main>
   </TheSwitch>
@@ -26,9 +25,6 @@ import PlatformFooter from '../components/PlatformFooter.astro';
   <TheMachine />
   <WhatYouCanDo />
   <WhyIBuiltThis />
-
-  <!-- Three.js scene (lazy loaded, appears after switch via MutationObserver on body.reveal-state) -->
-  <DigitalCage client:visible />
 
   <PlatformFooter />
 </Layout>

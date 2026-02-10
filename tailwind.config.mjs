@@ -12,6 +12,11 @@ export default {
         'electric-blue': '#00a2ff',
         'reveal-gray': '#1a1a1a',
         'reveal-red': '#ff3333',
+        'blood-red': '#cc0000',
+        'deep-crimson': '#8b0000',
+        'warning-amber': '#ff4500',
+        'toxic-green': '#00ff41',
+        'bruise-purple': '#6b21a8',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

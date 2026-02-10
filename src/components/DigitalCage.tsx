@@ -1,4 +1,4 @@
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { useRef, useState, useEffect, useMemo, Suspense } from 'react';
 import * as THREE from 'three';
 
@@ -9,6 +9,7 @@ import * as THREE from 'three';
 function usePrefersReducedMotion(): boolean {
   const [reduced, setReduced] = useState(false);
   useEffect(() => {
+    if (typeof window === 'undefined') return;
     const mql = window.matchMedia('(prefers-reduced-motion: reduce)');
     setReduced(mql.matches);
     const handler = (e: MediaQueryListEvent) => setReduced(e.matches);
@@ -19,149 +20,232 @@ function usePrefersReducedMotion(): boolean {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Humanoid silhouette shape                                          */
+/*  Sophisticated wireframe chamber with subtle human form             */
 /* ------------------------------------------------------------------ */
 
-function createSilhouetteShape(): THREE.Shape {
-  const shape = new THREE.Shape();
-
-  // Head (circle approximation at the top)
-  const headRadius = 0.25;
-  const headCenterY = 1.05;
-  const segments = 16;
-  for (let i = 0; i <= segments; i++) {
-    const angle = (i / segments) * Math.PI * 2;
-    const x = Math.cos(angle) * headRadius;
-    const y = Math.sin(angle) * headRadius + headCenterY;
-    if (i === 0) shape.moveTo(x, y);
-    else shape.lineTo(x, y);
-  }
-
-  // Neck
-  shape.moveTo(-0.06, headCenterY - headRadius);
-  shape.lineTo(-0.06, 0.7);
-
-  shape.lineTo(0.06, 0.7);
-  shape.lineTo(0.06, headCenterY - headRadius);
-
-  // Torso
-  shape.moveTo(-0.3, 0.7);
-  shape.lineTo(-0.3, -0.1);
-  shape.lineTo(0.3, -0.1);
-  shape.lineTo(0.3, 0.7);
-  shape.lineTo(-0.3, 0.7);
-
-  // Left arm
-  shape.moveTo(-0.3, 0.6);
-  shape.lineTo(-0.55, 0.0);
-  shape.lineTo(-0.45, -0.02);
-  shape.lineTo(-0.22, 0.5);
-
-  // Right arm
-  shape.moveTo(0.3, 0.6);
-  shape.lineTo(0.55, 0.0);
-  shape.lineTo(0.45, -0.02);
-  shape.lineTo(0.22, 0.5);
-
-  // Left leg
-  shape.moveTo(-0.2, -0.1);
-  shape.lineTo(-0.3, -0.9);
-  shape.lineTo(-0.18, -0.92);
-  shape.lineTo(-0.1, -0.12);
-
-  // Right leg
-  shape.moveTo(0.2, -0.1);
-  shape.lineTo(0.3, -0.9);
-  shape.lineTo(0.18, -0.92);
-  shape.lineTo(0.1, -0.12);
-
-  return shape;
-}
-
-/* ------------------------------------------------------------------ */
-/*  Cage mesh                                                          */
-/* ------------------------------------------------------------------ */
-
-interface CageProps {
+interface ChamberProps {
   isRevealed: boolean;
   reducedMotion: boolean;
 }
 
-function Cage({ isRevealed, reducedMotion }: CageProps) {
-  const ref = useRef<THREE.LineSegments>(null);
-
-  const edgesGeometry = useMemo(() => {
-    const box = new THREE.BoxGeometry(2.5, 3, 2.5);
-    return new THREE.EdgesGeometry(box);
+function Chamber({ isRevealed, reducedMotion }: ChamberProps) {
+  const chamberRef = useRef<THREE.Group>(null);
+  const figureRef = useRef<THREE.Group>(null);
+  
+  // Create sophisticated chamber geometry
+  const chamberGeometry = useMemo(() => {
+    const group = new THREE.Group();
+    
+    // Main chamber - larger, more imposing
+    const mainChamber = new THREE.BoxGeometry(3.2, 3.8, 3.2);
+    const mainEdges = new THREE.EdgesGeometry(mainChamber);
+    
+    // Inner grid lines for depth
+    const innerGeometry = new THREE.BufferGeometry();
+    const vertices = [];
+    
+    // Vertical grid lines
+    for (let i = -1; i <= 1; i += 0.5) {
+      for (let j = -1; j <= 1; j += 0.5) {
+        vertices.push(i, -1.9, j, i, 1.9, j);
+        vertices.push(i, j, -1.6, i, j, 1.6);
+      }
+    }
+    
+    // Horizontal grid lines
+    for (let i = -1.6; i <= 1.6; i += 0.4) {
+      for (let j = -1.6; j <= 1.6; j += 0.4) {
+        vertices.push(-1.6, i, j, 1.6, i, j);
+      }
+    }
+    
+    innerGeometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+    
+    group.add(new THREE.LineSegments(mainEdges));
+    group.add(new THREE.LineSegments(innerGeometry));
+    
+    return group;
   }, []);
 
-  const material = useMemo(
-    () =>
-      new THREE.LineBasicMaterial({
-        color: isRevealed ? '#ff3333' : '#333333',
-        transparent: true,
-        opacity: isRevealed ? 0.8 : 0.3,
-      }),
-    [isRevealed],
-  );
-
-  useFrame((_state, delta) => {
-    if (!ref.current || reducedMotion) return;
-    const speed = isRevealed ? 0.5 : 0.2;
-    ref.current.rotation.y += delta * speed;
-  });
-
-  return <lineSegments ref={ref} geometry={edgesGeometry} material={material} />;
-}
-
-/* ------------------------------------------------------------------ */
-/*  Silhouette mesh                                                    */
-/* ------------------------------------------------------------------ */
-
-interface SilhouetteProps {
-  isRevealed: boolean;
-  reducedMotion: boolean;
-}
-
-function Silhouette({ isRevealed, reducedMotion }: SilhouetteProps) {
-  const ref = useRef<THREE.Mesh>(null);
-
-  const geometry = useMemo(() => {
-    const shape = createSilhouetteShape();
-    return new THREE.ShapeGeometry(shape);
+  // Create elegant human figure using simple geometry
+  const figureGeometry = useMemo(() => {
+    const group = new THREE.Group();
+    
+    // Head
+    const headGeometry = new THREE.SphereGeometry(0.15, 8, 6);
+    const headWireframe = new THREE.WireframeGeometry(headGeometry);
+    const head = new THREE.LineSegments(headWireframe);
+    head.position.y = 0.85;
+    group.add(head);
+    
+    // Body - simplified rectangular form
+    const bodyGeometry = new THREE.BoxGeometry(0.4, 0.8, 0.2);
+    const bodyWireframe = new THREE.WireframeGeometry(bodyGeometry);
+    const body = new THREE.LineSegments(bodyWireframe);
+    body.position.y = 0.2;
+    group.add(body);
+    
+    // Arms - simple cylinders
+    const armGeometry = new THREE.CylinderGeometry(0.03, 0.03, 0.6, 6);
+    const armWireframe = new THREE.WireframeGeometry(armGeometry);
+    
+    const leftArm = new THREE.LineSegments(armWireframe);
+    leftArm.position.set(-0.3, 0.4, 0);
+    leftArm.rotation.z = 0.3;
+    group.add(leftArm);
+    
+    const rightArm = new THREE.LineSegments(armWireframe);
+    rightArm.position.set(0.3, 0.4, 0);
+    rightArm.rotation.z = -0.3;
+    group.add(rightArm);
+    
+    // Legs
+    const legGeometry = new THREE.CylinderGeometry(0.04, 0.04, 0.8, 6);
+    const legWireframe = new THREE.WireframeGeometry(legGeometry);
+    
+    const leftLeg = new THREE.LineSegments(legWireframe);
+    leftLeg.position.set(-0.1, -0.6, 0);
+    group.add(leftLeg);
+    
+    const rightLeg = new THREE.LineSegments(legWireframe);
+    rightLeg.position.set(0.1, -0.6, 0);
+    group.add(rightLeg);
+    
+    return group;
   }, []);
 
-  const material = useMemo(
-    () =>
-      new THREE.MeshBasicMaterial({
-        color: isRevealed ? '#ff3333' : '#666666',
-        transparent: true,
-        opacity: isRevealed ? 0.6 : 0.2,
-        side: THREE.DoubleSide,
-      }),
-    [isRevealed],
+  // Materials with sophisticated shading
+  const chamberMaterial = useMemo(() => 
+    new THREE.LineBasicMaterial({
+      color: isRevealed ? '#ff3333' : '#444444',
+      transparent: true,
+      opacity: isRevealed ? 0.9 : 0.4,
+      linewidth: 1,
+    }),
+    [isRevealed]
   );
 
-  useFrame(() => {
-    if (!ref.current) return;
-    if (isRevealed && !reducedMotion) {
-      // Subtle glitch jitter
-      ref.current.position.x = (Math.random() - 0.5) * 0.06;
-      ref.current.position.y = (Math.random() - 0.5) * 0.04;
-    } else {
-      ref.current.position.x = 0;
-      ref.current.position.y = 0;
+  const figureMaterial = useMemo(() => 
+    new THREE.LineBasicMaterial({
+      color: isRevealed ? '#ff6666' : '#666666',
+      transparent: true,
+      opacity: isRevealed ? 0.7 : 0.3,
+      linewidth: 1,
+    }),
+    [isRevealed]
+  );
+
+  // Smooth rotation animation
+  useFrame((state, delta) => {
+    if (!chamberRef.current || reducedMotion) return;
+    
+    const time = state.clock.elapsedTime;
+    
+    // Smooth continuous rotation
+    chamberRef.current.rotation.y += delta * (isRevealed ? 0.6 : 0.3);
+    
+    // Subtle figure movement when revealed
+    if (figureRef.current && isRevealed) {
+      figureRef.current.position.y = Math.sin(time * 0.5) * 0.05 - 0.1;
+      figureRef.current.rotation.x = Math.sin(time * 0.3) * 0.1;
     }
   });
 
+  // Apply materials to all geometry
+  useEffect(() => {
+    if (chamberRef.current) {
+      chamberRef.current.traverse((child) => {
+        if (child instanceof THREE.LineSegments) {
+          child.material = chamberMaterial;
+        }
+      });
+    }
+    if (figureRef.current) {
+      figureRef.current.traverse((child) => {
+        if (child instanceof THREE.LineSegments) {
+          child.material = figureMaterial;
+        }
+      });
+    }
+  }, [chamberMaterial, figureMaterial]);
+
+  // Cleanup
+  useEffect(() => {
+    return () => {
+      chamberGeometry.traverse((child) => {
+        if (child instanceof THREE.LineSegments) {
+          child.geometry.dispose();
+          if (Array.isArray(child.material)) {
+            child.material.forEach(m => m.dispose());
+          } else {
+            child.material.dispose();
+          }
+        }
+      });
+      figureGeometry.traverse((child) => {
+        if (child instanceof THREE.LineSegments) {
+          child.geometry.dispose();
+        }
+      });
+      chamberMaterial.dispose();
+      figureMaterial.dispose();
+    };
+  }, [chamberGeometry, figureGeometry, chamberMaterial, figureMaterial]);
+
   return (
-    <mesh ref={ref} geometry={geometry} material={material} position={[0, -0.1, 0]} />
+    <group>
+      <group ref={chamberRef}>
+        <primitive object={chamberGeometry} />
+      </group>
+      <group ref={figureRef} position={[0, -0.1, 0]}>
+        <primitive object={figureGeometry} />
+      </group>
+    </group>
   );
 }
 
 /* ------------------------------------------------------------------ */
-/*  Scene composition                                                  */
+/*  Enhanced lighting and scene composition                            */
 /* ------------------------------------------------------------------ */
+
+function SceneLighting({ isRevealed }: { isRevealed: boolean }) {
+  const { gl } = useThree();
+  
+  useEffect(() => {
+    // Optimize renderer settings for better performance and quality
+    gl.toneMapping = THREE.ACESFilmicToneMapping;
+    gl.toneMappingExposure = 0.8;
+    gl.setClearColor(0x000000, 0);
+  }, [gl]);
+
+  return (
+    <>
+      {/* Ambient light for general illumination */}
+      <ambientLight intensity={isRevealed ? 0.3 : 0.15} color="#ffffff" />
+      
+      {/* Key light from top-front */}
+      <directionalLight 
+        position={[2, 4, 3]} 
+        intensity={isRevealed ? 0.8 : 0.4}
+        color={isRevealed ? "#ff4444" : "#666666"}
+      />
+      
+      {/* Fill light from back */}
+      <directionalLight 
+        position={[-1, 1, -2]} 
+        intensity={0.2}
+        color="#0088ff"
+      />
+      
+      {/* Rim light for dramatic edge lighting */}
+      <directionalLight 
+        position={[0, 0, -3]} 
+        intensity={isRevealed ? 0.4 : 0.2}
+        color="#ffffff"
+      />
+    </>
+  );
+}
 
 interface CageSceneProps {
   isRevealed: boolean;
@@ -171,15 +255,14 @@ interface CageSceneProps {
 function CageScene({ isRevealed, reducedMotion }: CageSceneProps) {
   return (
     <>
-      <ambientLight intensity={1} />
-      <Cage isRevealed={isRevealed} reducedMotion={reducedMotion} />
-      <Silhouette isRevealed={isRevealed} reducedMotion={reducedMotion} />
+      <SceneLighting isRevealed={isRevealed} />
+      <Chamber isRevealed={isRevealed} reducedMotion={reducedMotion} />
     </>
   );
 }
 
 /* ------------------------------------------------------------------ */
-/*  CSS-only fallback                                                  */
+/*  Enhanced CSS-only fallback                                         */
 /* ------------------------------------------------------------------ */
 
 function CssFallback() {
@@ -191,21 +274,56 @@ function CssFallback() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        perspective: '600px',
       }}
     >
+      {/* Chamber outline */}
       <div
         style={{
-          width: 120,
-          height: 150,
-          border: '1px solid #333',
+          width: 160,
+          height: 190,
+          border: '1px solid #444',
+          borderRadius: '2px',
+          position: 'relative',
           transformStyle: 'preserve-3d' as const,
-          animation: 'digital-cage-rotate 10s linear infinite',
+          animation: 'chamber-rotate 12s linear infinite',
+          boxShadow: 'inset 0 0 20px rgba(68, 68, 68, 0.2)',
         }}
-      />
+      >
+        {/* Interior grid lines */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '20%',
+            left: '20%',
+            right: '20%',
+            bottom: '20%',
+            borderTop: '1px solid #333',
+            borderLeft: '1px solid #333',
+            opacity: 0.5,
+          }}
+        />
+        
+        {/* Figure representation */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '30%',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '8px',
+            height: '60px',
+            background: 'linear-gradient(to bottom, #666 0%, #666 15%, transparent 15%, transparent 30%, #666 30%, #666 70%, transparent 70%, transparent 85%, #666 85%, #666 100%)',
+            borderRadius: '2px',
+            opacity: 0.6,
+          }}
+        />
+      </div>
+      
       <style>{`
-        @keyframes digital-cage-rotate {
-          from { transform: rotateY(0deg); }
-          to   { transform: rotateY(360deg); }
+        @keyframes chamber-rotate {
+          from { transform: rotateY(0deg) rotateX(5deg); }
+          to   { transform: rotateY(360deg) rotateX(5deg); }
         }
       `}</style>
     </div>
@@ -235,6 +353,7 @@ export default function DigitalCage({ isRevealed: propRevealed = false }: Digita
   const [mounted, setMounted] = useState(false);
   const [canvasError, setCanvasError] = useState(false);
   const reducedMotion = usePrefersReducedMotion();
+  const observerRef = useRef<MutationObserver | null>(null);
 
   /* Mark as mounted to avoid hydration issues with dynamic styles */
   useEffect(() => {
@@ -257,19 +376,31 @@ export default function DigitalCage({ isRevealed: propRevealed = false }: Digita
     // Initial check
     check();
 
-    const observer = new MutationObserver((mutations) => {
+    // Performance: Reuse observer reference to prevent memory leaks
+    if (observerRef.current) {
+      observerRef.current.disconnect();
+    }
+
+    observerRef.current = new MutationObserver((mutations) => {
       for (const m of mutations) {
         if (m.type === 'attributes' && m.attributeName === 'class') {
           check();
+          break; // Early exit for performance
         }
       }
     });
 
-    observer.observe(body, { attributes: true, attributeFilter: ['class'] });
-    return () => observer.disconnect();
+    observerRef.current.observe(body, { attributes: true, attributeFilter: ['class'] });
+    
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+        observerRef.current = null;
+      }
+    };
   }, []);
 
-  /* Container styles — use 0 opacity during SSR, then resolve on client */
+  /* Container styles — refined positioning and transitions */
   const containerStyle: React.CSSProperties = {
     position: 'fixed',
     top: '50%',
@@ -280,37 +411,81 @@ export default function DigitalCage({ isRevealed: propRevealed = false }: Digita
     zIndex: 10,
     pointerEvents: 'none' as const,
     opacity: mounted && revealed ? 1 : 0,
-    transition: 'opacity 1.2s ease',
+    transition: 'opacity 2s cubic-bezier(0.4, 0, 0.2, 1)', // Smoother easing
+    filter: revealed ? 'contrast(1.1) saturate(1.2)' : 'none', // Enhanced visual impact
   };
 
   return (
     <>
-      {/* Responsive sizing override for mobile */}
+      {/* Enhanced responsive sizing with better mobile optimization */}
       <style>{`
-        .digital-cage-container {
+        .digital-chamber-container {
           width: 400px !important;
           height: 400px !important;
+          filter: drop-shadow(0 0 20px rgba(255, 51, 51, 0.1));
+        }
+        .reveal-state .digital-chamber-container {
+          filter: drop-shadow(0 0 30px rgba(255, 51, 51, 0.3));
+          animation: chamber-glow 3s ease-in-out infinite alternate;
+        }
+        @keyframes chamber-glow {
+          from { filter: drop-shadow(0 0 20px rgba(255, 51, 51, 0.2)); }
+          to   { filter: drop-shadow(0 0 40px rgba(255, 51, 51, 0.4)); }
         }
         @media (max-width: 640px) {
-          .digital-cage-container {
-            width: 280px !important;
-            height: 280px !important;
+          .digital-chamber-container {
+            width: 300px !important;
+            height: 300px !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .digital-chamber-container {
+            width: 250px !important;
+            height: 250px !important;
+          }
+        }
+        /* Respect reduced motion preferences */
+        @media (prefers-reduced-motion: reduce) {
+          .digital-chamber-container {
+            animation: none !important;
           }
         }
       `}</style>
 
-      <div className="digital-cage-container" style={containerStyle} suppressHydrationWarning>
+      <div className="digital-chamber-container" style={containerStyle} suppressHydrationWarning>
         {canvasError ? (
           <CssFallback />
         ) : (
           <Suspense fallback={<CssFallback />}>
             <ErrorBoundary onError={() => setCanvasError(true)}>
               <Canvas
-                gl={{ antialias: true, alpha: true }}
-                dpr={[1, 2]}
-                camera={{ position: [0, 0, 5] }}
+                gl={{ 
+                  antialias: true, 
+                  alpha: true,
+                  powerPreference: 'high-performance',
+                  stencil: false,
+                  depth: true, // Enable depth buffer for proper 3D rendering
+                  preserveDrawingBuffer: false,
+                  logarithmicDepthBuffer: true, // Better depth precision
+                }}
+                dpr={[1, typeof window !== 'undefined' ? Math.min(2, window.devicePixelRatio) : 2]}
+                camera={{ 
+                  position: [0, 0, 6],
+                  fov: 45,
+                  near: 0.1,
+                  far: 100,
+                }}
                 frameloop={reducedMotion ? 'demand' : 'always'}
                 style={{ background: 'transparent' }}
+                performance={{ min: 0.5 }}
+                onCreated={(state) => {
+                  // Enhanced renderer configuration
+                  state.gl.toneMapping = THREE.ACESFilmicToneMapping;
+                  state.gl.toneMappingExposure = 0.8;
+                  state.gl.shadowMap.enabled = false; // Shadows not needed for wireframe
+                  state.gl.setPixelRatio(Math.min(2, window.devicePixelRatio));
+                  state.gl.setClearColor(0x000000, 0);
+                }}
               >
                 <CageScene isRevealed={revealed} reducedMotion={reducedMotion} />
               </Canvas>

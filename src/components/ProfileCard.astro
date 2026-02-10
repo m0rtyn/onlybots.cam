@@ -8,6 +8,9 @@ interface Props {
   price: string;
   avatarSeed: number;
   statId: string;
+  index: number;
+  baitLabel: string;
+  baitValue: string;
   revealStat: string;
   revealText: string;
   revealSource: string;
@@ -22,16 +25,20 @@ const {
   price,
   avatarSeed,
   statId,
+  index,
+  baitLabel,
+  baitValue,
   revealStat,
   revealText,
   revealSource,
   revealSourceUrl,
 } = Astro.props;
 
-// Derive gradient hues from the seed
-const hue1 = (avatarSeed * 137) % 360;
-const hue2 = (hue1 + 45) % 360;
-const avatarGradient = `linear-gradient(135deg, hsl(${hue1}, 70%, 50%), hsl(${hue2}, 80%, 40%))`;
+// Simple sequential mapping: 1st card -> model-1.png, 2nd -> model-2.png, etc.
+// If no image exists for the position, use default-avatar.png
+const imageNumber = index + 1;
+const imageFilename = imageNumber <= 9 ? `model-${imageNumber}.png` : 'default-avatar.png';
+const avatarImageUrl = `/images/models/${imageFilename}`;
 
 // Badge styling
 const badgeStyles: Record<string, string> = {
@@ -51,18 +58,28 @@ const badgeClass = badgeStyles[badge] || 'bg-gray-600 text-white';
   <div class="card-front flex flex-col items-center bg-dark-card p-5 pt-6 static-noise">
     <!-- Avatar circle -->
     <div
-      class="w-[120px] h-[120px] rounded-full mb-4 ring-2 ring-neon-pink/30 shrink-0"
-      style={`background: ${avatarGradient}; filter: blur(1px) saturate(1.5); mix-blend-mode: luminosity;`}
+      class="w-[120px] h-[120px] rounded-full mb-4 ring-2 ring-neon-pink/30 shrink-0 overflow-hidden bg-gray-800"
       aria-hidden="true"
-    ></div>
+    >
+      <img 
+        src={avatarImageUrl} 
+        alt=""
+        class="w-full h-full object-cover"
+        loading="lazy"
+      />
+    </div>
 
     <!-- Bot name -->
     <h3 class="text-white font-semibold text-base tracking-wide mb-2">{name}</h3>
 
     <!-- Badge -->
-    <span class={`inline-flex items-center text-xs font-semibold px-2.5 py-0.5 rounded-full mb-3 ${badgeClass}`}>
+    <span class={`inline-flex items-center text-xs font-semibold px-2.5 py-0.5 rounded-full mb-2 ${badgeClass}`}>
       {badge}
     </span>
+
+    <!-- Bait label & value from statistics -->
+    <p class="text-neon-pink text-xs font-semibold tracking-wide mb-0.5">{baitLabel}</p>
+    <p class="text-gray-300 text-xs mb-2">{baitValue}</p>
 
     <!-- Fans + Rating row -->
     <div class="flex items-center gap-4 text-xs text-gray-400 mb-2">
@@ -75,7 +92,7 @@ const badgeClass = badgeStyles[badge] || 'bg-gray-600 text-white';
 
     <!-- Subscribe button -->
     <button
-      class="subscribe-btn w-full bg-neon-pink hover:brightness-110 transition-all text-white font-bold py-2 rounded-lg text-sm mt-auto neon-glow"
+      class="subscribe-btn w-full bg-neon-pink hover:brightness-110 transition-all text-white font-bold py-2 rounded-lg text-sm mt-auto neon-glow cursor-pointer"
       data-stat-id={statId}
     >
       Subscribe

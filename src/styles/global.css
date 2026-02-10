@@ -28,8 +28,11 @@
   }
 
   .reveal-state {
-    --accent: #666666;
-    --accent-dim: #444444;
+    --accent: #cc0000;
+    --accent-dim: #8b0000;
+    --accent-glow: rgba(204, 0, 0, 0.15);
+    --warning: #ff4500;
+    --danger: #dc143c;
   }
 
   .neon-glow {
@@ -43,21 +46,38 @@
   .card-flip {
     transform-style: preserve-3d;
     transition: transform 0.6s ease-in-out;
+    will-change: transform;
+    height: 25rem;
   }
 
   .card-flip.flipped {
     transform: rotateY(180deg);
   }
 
+  .card-flip:not(.flipped) {
+    /* Remove will-change after animation completes */
+    will-change: auto;
+  }
+
   .card-front,
   .card-back {
     backface-visibility: hidden;
     position: absolute;
-    inset: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Performance: Force GPU layer */
+    transform: translateZ(0);
   }
 
   .card-back {
     transform: rotateY(180deg);
+  }
+
+  /* Ensure card front is visible by default */
+  .card-front {
+    z-index: 1;
   }
 
   .static-noise {
@@ -67,6 +87,194 @@
   .typing-dots::after {
     content: '...';
     animation: typing 1.5s steps(3) infinite;
+  }
+
+  .scroll-hint {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    backdrop-filter: blur(8px);
+    animation: pulse-subtle 2s ease-in-out infinite;
+    /* Performance: GPU acceleration for smooth animation */
+    will-change: opacity, transform;
+  }
+
+  @keyframes pulse-subtle {
+    0%, 100% { 
+      transform: translateY(16px) scale(1); 
+    }
+    50% { 
+      transform: translateY(16px) scale(1.05); 
+    }
+  }
+
+  .landing-grid {
+    transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out, filter 0.8s ease-in-out;
+    /* Performance: GPU acceleration for smooth transitions */
+    will-change: opacity, transform, filter;
+  }
+
+  /* Reveal state - hide landing grid completely */
+  .reveal-state .landing-grid {
+    pointer-events: none;
+    user-select: none;
+    opacity: 0 !important;
+    transform: translateY(-50px) scale(0.95) !important;
+    filter: blur(8px) !important;
+    /* Clean up will-change after transition */
+    will-change: auto;
+  }
+
+  /* Reveal sections - completely hidden in bait mode */
+  .reveal-section {
+    display: none; /* Remove from layout flow in bait mode */
+    will-change: opacity, transform;
+    transform: translateZ(0); /* Force GPU layer */
+  }
+
+  /* Show reveal sections only in reveal state */
+  .reveal-state .reveal-section {
+    display: block;
+    scroll-snap-align: start;
+    border-top: 1px solid rgba(204, 0, 0, 0.08);
+  }
+
+  .reveal-section.revealed {
+    will-change: auto; /* Clean up after animation */
+  }
+
+  /* Scroll snap for reveal state */
+  body.reveal-state {
+    scroll-snap-type: y proximity;
+    scroll-padding-top: 1rem;
+  }
+
+  /* Bait content wrapper - collapse in reveal state */
+  .reveal-state .bait-content {
+    min-height: 0 !important;
+  }
+
+  /* Scary red vignette overlay in reveal state */
+  body.reveal-state::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(139, 0, 0, 0.12) 100%);
+    animation: vignette-pulse 4s ease-in-out infinite;
+  }
+
+  @keyframes vignette-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  /* View-driven heading magnification (native CSS scroll animation) */
+  @supports (animation-timeline: view()) {
+    .reveal-state .reveal-section h2 {
+      animation: heading-magnify linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 80%;
+    }
+
+    .reveal-state .reveal-section .stat-number {
+      animation: stat-magnify linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 70%;
+    }
+  }
+
+  @keyframes heading-magnify {
+    from {
+      opacity: 0.15;
+      transform: scale(0.8) translateY(20px);
+      filter: blur(4px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+      filter: blur(0);
+    }
+  }
+
+  @keyframes stat-magnify {
+    from {
+      opacity: 0;
+      transform: scale(0.7);
+      filter: blur(6px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+      filter: blur(0);
+    }
+  }
+
+  /* Footer positioning */
+  .platform-footer {
+    margin-top: auto; /* Push footer to bottom in flexbox layout */
+  }
+
+  /* Reveal state - hide footer during reveal, show after */
+  .reveal-state .platform-footer {
+    opacity: 0.7;
+    transition: opacity 0.5s ease-out 1s; /* Delay footer appearance */
+  }
+
+  /* Scary logo in reveal state */
+  .reveal-state .platform-header {
+    border-bottom-color: rgba(139, 0, 0, 0.3);
+    background: linear-gradient(180deg, #0a0a0a 0%, rgba(139, 0, 0, 0.06) 100%);
+    overflow: visible !important;
+  }
+
+  .reveal-state .platform-header > div {
+    overflow: visible !important;
+  }
+
+  .logo-wrap {
+    overflow: visible;
+  }
+
+  .reveal-state .logo-main {
+    color: #cc0000 !important;
+    text-shadow: 0 0 8px rgba(204, 0, 0, 0.6), 0 0 20px rgba(204, 0, 0, 0.3);
+    animation: logo-glitch 3s ease-in-out infinite;
+  }
+
+  .reveal-state .logo-accent {
+    color: #ff0000 !important;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.8), 0 0 30px rgba(255, 0, 0, 0.4), 0 0 60px rgba(255, 0, 0, 0.15);
+    animation: logo-accent-flicker 2s ease-in-out infinite;
+  }
+
+  @keyframes logo-glitch {
+    0%, 90%, 100% { transform: translate(0); }
+    92% { transform: translate(-2px, 1px); }
+    94% { transform: translate(2px, -1px); }
+    96% { transform: translate(-1px, -1px); }
+    98% { transform: translate(1px, 0); }
+  }
+
+  @keyframes logo-accent-flicker {
+    0%, 100% { opacity: 1; }
+    47% { opacity: 1; }
+    48% { opacity: 0.4; }
+    49% { opacity: 1; }
+    73% { opacity: 1; }
+    74% { opacity: 0.6; }
+    75% { opacity: 1; }
+  }
+
+  /* Performance: Optimize subscribe buttons for interaction */
+  .subscribe-btn, .load-more-btn {
+    will-change: transform, background-color;
+    transform: translateZ(0); /* Force GPU layer */
+  }
+
+  .subscribe-btn:hover, .load-more-btn:hover {
+    transform: translateZ(0) scale(1.02);
   }
 }
 

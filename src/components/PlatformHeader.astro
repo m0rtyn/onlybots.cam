@@ -6,10 +6,19 @@
   <!-- Main nav row -->
   <div class="flex items-center justify-between h-[60px] max-w-7xl mx-auto px-4">
     <!-- Left: Logo -->
-    <a href="#" class="flex items-center gap-0 shrink-0">
-      <span class="text-xl font-bold text-white tracking-tight">onlybots</span>
-      <span class="text-xl font-bold text-neon-pink neon-glow-text">.cam</span>
-    </a>
+    <div class="logo-wrap" style="overflow: visible;">
+      <a href="#" class="flex items-center gap-0 shrink-0 relative z-10" style="overflow: visible;">
+        <span class="logo-main text-xl font-bold text-white tracking-tight">onlybots</span>
+        <span class="logo-accent text-xl font-bold text-neon-pink neon-glow-text">.cam</span>
+        <!-- Blood drip elements -->
+        <!-- Blood drip elements -->
+        <span class="logo-drip" style="top: 17px; left:9.3%; width:2px; height:85px; animation-delay:0.8s; animation-duration:3.5s;" aria-hidden="true"></span> 
+        <span class="logo-drip" style="top: 17px; left:34.1%; width:3px; height:110px; animation-delay:2.0s; animation-duration:4.5s;" aria-hidden="true"></span> 
+        <span class="logo-drip" style="top: 17.8px; left:55.1%; width:2px; height:95px; animation-delay:3.2s; animation-duration:3.0s;" aria-hidden="true"></span> 
+        <span class="logo-drip" style="top: 17.4px; left:69.3%; width:2px; height:45.5px; animation-delay:1.2s; animation-duration:5.0s;" aria-hidden="true"></span> 
+        <span class="logo-drip" style="top: 17px; left:88.9%; width:2px; height:120px; animation-delay:2.8s; animation-duration:4.0s;" aria-hidden="true"></span>
+      </a>
+    </div>
 
     <!-- Center: Fake search bar -->
     <div class="hidden md:flex flex-1 max-w-md mx-6">
@@ -60,3 +69,42 @@
     </a>
   </nav>
 </header>
+
+<style>
+  .logo-drip {
+    position: absolute;
+    top: 100%;
+    background: linear-gradient(180deg, 
+      #cc0000 0%,     /* bright red at top */
+      #991b1b 30%,    /* darker red */
+      #7f1d1d 70%,    /* very dark red */
+      #450a0a 90%,    /* almost black */
+      transparent 100%
+    );
+    border-radius: 0 0 100% 100%;  /* more teardrop */
+    box-shadow: 
+      0 4px 8px rgba(220, 38, 38, 0.6),
+      inset 0 0 6px rgba(0, 0, 0, 0.03);
+    pointer-events: none;
+    z-index: 60;
+    display: none;
+    transform-origin: top center;
+  }
+
+  :global(.reveal-state) .logo-drip {
+    display: block;
+    animation-name: logoDrip;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes logoDrip {
+    0%   { opacity: 0; transform: translateY(-10px) translateX(0) scaleY(0); }
+    5%   { opacity: 0.3; transform: translateY(-5px) translateX(0) scaleY(0.2); }
+    15%  { opacity: 0.9; transform: translateY(0) translateX(-1px) scaleY(0.6); }
+    35%  { opacity: 0.95; transform: translateY(10px) translateX(1px) scaleY(1); }
+    60%  { opacity: 0.8; transform: translateY(40px) translateX(-0.5px) scaleY(1.1); }
+    80%  { opacity: 0.4; transform: translateY(80px) translateX(0.5px) scaleY(0.8); }
+    100% { opacity: 0; transform: translateY(120px) translateX(0) scaleY(0.3); }
+  }
+</style>
