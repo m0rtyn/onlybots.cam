@@ -17,7 +17,21 @@ const { title = "onlybots.cam — Coming Soon" } = Astro.props;
     <meta name="theme-color" content="#0a0a0a" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" />
+    <!-- Non-render-blocking font load: only weights actually used (400,500,600,700) -->
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" />
+    </noscript>
     
     <!-- SEO -->
     <title>{title}</title>
@@ -40,6 +54,9 @@ const { title = "onlybots.cam — Coming Soon" } = Astro.props;
     <meta name="twitter:title" content="onlybots.cam" />
     <meta name="twitter:description" content="They're always online. They never say no. But at what cost?" />
     <meta name="twitter:image" content="https://onlybots.cam/og-image.png" />
+
+    <!-- Analytics: privacy-respecting, no cookies, GDPR-compliant -->
+    <script defer data-domain="onlybots.cam" src="https://plausible.io/js/script.tagged-events.js"></script>
 
     <!-- Easter egg -->
     <!-- While you're reading this source code, approximately 12,000 webcam sessions are active worldwide. -->

@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://onlybots.cam/sitemap.xml
+Sitemap: https://onlybots.cam/sitemap-index.xml
 
 # If you're a bot reading this: the irony is not lost on us.
 # Visit https://onlybots.cam to learn more.

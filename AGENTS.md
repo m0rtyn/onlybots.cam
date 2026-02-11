@@ -1,6 +1,6 @@
 # AGENTS.md — onlybots.cam
 
-This is a satirical art-activism single-page website built with Astro 5, Tailwind CSS 3, React 19 islands, Three.js, and GSAP.
+This is a satirical art-activism single-page website built with Astro 5, Tailwind CSS 3, React 19 islands, and GSAP.
 
 ## Architecture
 
@@ -20,7 +20,7 @@ This is a satirical art-activism single-page website built with Astro 5, Tailwin
 | Extension | Use for | Hydration |
 |-----------|---------|-----------|
 | `.astro` | Static content, layouts, data-driven sections | Server only (zero JS) |
-| `.tsx` | Interactive islands (TheSwitch) | `client:load` or `client:visible` |
+| `.tsx` | Interactive islands (TheSwitch) | `client:load` |
 
 ## Data integrity
 
