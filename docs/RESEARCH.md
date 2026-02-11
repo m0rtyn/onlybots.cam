@@ -76,6 +76,8 @@
 - Among 573 trans women with history of sex work in California
 
 > **Source:** Nemoto T, Boedeker B, Iwamoto M. "Social support, exposure to violence and transphobia, and correlates of depression among male-to-female transgender women with a history of sex work." *Am J Public Health*, 2011; 101(10): 1980–1988.
+>
+> **⚠️ Citation note:** These figures are cited via Argento et al. 2019, which attributes them to the full 573-person sample. However, the Nemoto PubMed abstract states "About three quarters of **White participants** reported ever having suicidal ideation, of whom 64% reported suicide attempts" — suggesting these rates may apply to the White subgroup specifically. The full paper should be consulted to confirm whether overall sample rates match.
 
 ### Risk Factors for Suicidality (Adjusted Odds Ratios)
 
@@ -257,22 +259,24 @@ Study of 970 sexual minority adolescents (ages 14–17):
 
 #### Association: Threat to Post Explicit Media →
 
-| Outcome | Odds Ratio |
+| Outcome | Odds Ratio (95% CI) |
 |---|---|
-| Suicide ideation | **OR 1.88** |
-| Suicide plan | **OR 2.12** |
-| **Suicide attempt** | **OR 3.56** |
-| Self-harm | **OR 1.96** |
+| Suicide ideation | **OR 1.84** (1.16–2.92) |
+| Suicide plan | **OR 2.11** (1.31–3.43) |
+| **Suicide attempt** | **OR 3.51** (2.02–6.08) |
+| Self-harm | **OR 1.96** (1.23–3.12) |
 
 #### Association: Nonconsensual Posting →
 
-| Outcome | Odds Ratio |
+| Outcome | Odds Ratio (95% CI) |
 |---|---|
-| Suicide ideation | **OR 1.82** |
-| **Suicide attempt** | **OR 2.20** |
+| Suicide ideation | **OR 1.77** (1.04–3.05) |
+| **Suicide attempt** | **OR 2.15** (1.08–4.28) |
 
 > **Source:** Srivastava A, et al. "Digital Sexual Violence and Suicide Risk." *J Interpers Violence*, 2022. PMC9850373.
 > [https://pmc.ncbi.nlm.nih.gov/articles/PMC9850373/](https://pmc.ncbi.nlm.nih.gov/articles/PMC9850373/)
+>
+> **Note:** The paper's abstract reports slightly different ORs than its body text and Table 2/3 (e.g., abstract says OR 1.88 for threat → ideation vs. 1.84 in Table 2). Values above are taken from the regression tables, which are the authoritative source.
 
 ---
 
