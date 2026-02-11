@@ -1,7 +1,7 @@
-/* Self-hosted variable fonts — eliminates Google Fonts third-party requests */
+/* Self-hosted variable fonts (woff2) — no third-party requests */
 @font-face {
   font-family: 'Inter';
-  src: url('/fonts/Inter/Inter-VariableFont_opsz,wght.ttf') format('truetype');
+  src: url('/fonts/Inter/Inter-VariableFont_opsz,wght.woff2') format('woff2');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
@@ -9,7 +9,7 @@
 
 @font-face {
   font-family: 'JetBrains Mono';
-  src: url('/fonts/JetBrains_Mono/JetBrainsMono-VariableFont_wght.ttf') format('truetype');
+  src: url('/fonts/JetBrains_Mono/JetBrainsMono-VariableFont_wght.woff2') format('woff2');
   font-weight: 100 800;
   font-style: normal;
   font-display: swap;
