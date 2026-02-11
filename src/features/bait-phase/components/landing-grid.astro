@@ -30,7 +30,13 @@ const cards = statisticsData.slice(0, 9).map((stat, i) => ({
   <!-- Card grid -->
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
     {cards.map((card, index) => (
-      <ProfileCard {...card} index={index} />
+      index === 0 ? (
+        <div class="sm:col-span-2 featured-card">
+          <ProfileCard {...card} index={index} />
+        </div>
+      ) : (
+        <ProfileCard {...card} index={index} />
+      )
     ))}
   </div>
 
@@ -41,3 +47,32 @@ const cards = statisticsData.slice(0, 9).map((stat, i) => ({
     </button>
   </div>
 </section>
+
+<style>
+  .featured-card .card-flip {
+    aspect-ratio: 16 / 9;
+    height: auto;
+  }
+</style>
+
+<script>
+  const counter = document.querySelector('.online-counter');
+  if (counter) {
+    let count = 1247;
+
+    function tick() {
+      if (!document.body.classList.contains('bait-state')) return;
+
+      const delta = Math.floor(Math.random() * 8) - 2; // range: -2 to +5
+      count = Math.max(1100, Math.min(1400, count + delta));
+      counter!.textContent = `${count.toLocaleString()} models online now`;
+
+      const delay = 3000 + Math.random() * 5000; // 3–8 seconds
+      setTimeout(tick, delay);
+    }
+
+    // Kick off the first tick after a random initial delay
+    const initialDelay = 3000 + Math.random() * 5000;
+    setTimeout(tick, initialDelay);
+  }
+</script>

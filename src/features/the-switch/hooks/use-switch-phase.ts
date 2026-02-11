@@ -136,7 +136,12 @@ export function useSwitchPhase(): UseSwitchPhaseReturn {
         });
 
       // Reset document title
-      document.title = 'onlybots.cam — Coming Soon';
+      document.title = 'onlybots.cam';
+
+      // Reset URL hash
+      if (window.location.hash) {
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
     }
 
     // Returning visitor → skip straight to revealed (unless debug mode)
@@ -146,6 +151,10 @@ export function useSwitchPhase(): UseSwitchPhaseReturn {
         alreadySwitched = sessionStorage.getItem(STORAGE_KEY) === 'true';
       } catch {
         /* private browsing */
+      }
+      // Direct link via #the-truth also triggers reveal
+      if (!alreadySwitched && window.location.hash === '#the-truth') {
+        alreadySwitched = true;
       }
     }
 

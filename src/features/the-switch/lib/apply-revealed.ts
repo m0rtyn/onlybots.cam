@@ -70,8 +70,13 @@ export function applyRevealedState(): void {
       setTimeout(() => (header.style.willChange = 'auto'), 300);
     }
 
-    // Document title
+    // Document title + URL hash
     document.title = REVEALED_TITLE;
+    history.replaceState(null, '', '#the-truth');
+
+    // Favicon swap to blood-red variant
+    const faviconLink = document.querySelector<HTMLLinkElement>('link[rel="icon"]');
+    if (faviconLink) faviconLink.href = '/favicon-revealed.svg';
 
     // Online counter text swap
     if (counter) {

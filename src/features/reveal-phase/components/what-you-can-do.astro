@@ -61,6 +61,7 @@ const categoryColors: Record<string, { bg: string; text: string }> = {
       Share this page
     </button>
     <p id="share-feedback" class="text-xs text-gray-500 mt-2 opacity-0 transition-opacity duration-300"></p>
+    <p id="visitor-count" class="text-xs text-gray-600 mt-4 font-mono opacity-0 transition-opacity duration-500"></p>
   </div>
 </section>
 
@@ -69,6 +70,24 @@ const categoryColors: Record<string, { bg: string; text: string }> = {
   const feedback = document.getElementById("share-feedback");
 
   const shareText = "onlybots.cam — They're always online. They never say no. But at what cost? https://onlybots.cam";
+
+  // Social proof: fetch visitor count via server proxy (API key stays server-side)
+  (async () => {
+    const el = document.getElementById('visitor-count');
+    if (!el) return;
+    try {
+      const res = await fetch('/api/stats');
+      if (!res.ok) throw new Error('API error');
+      const data = await res.json();
+      const visitors = data?.results?.visitors?.value;
+      if (visitors && visitors > 100) {
+        el.textContent = `${Number(visitors).toLocaleString()} people have seen this`;
+        el.style.opacity = '1';
+      }
+    } catch {
+      // Silently fail — social proof is optional
+    }
+  })();
 
   shareBtn?.addEventListener("click", async () => {
     if (navigator.share) {

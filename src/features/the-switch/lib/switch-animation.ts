@@ -178,10 +178,17 @@ export function createSwitchTimeline(
     );
   }
 
-  // T+700ms — Update document title
+  // T+700ms — Update document title + URL hash
   tl.add(() => {
     document.title = REVEALED_TITLE;
+    history.replaceState(null, '', '#the-truth');
   }, 0.7);
+
+  // T+750ms — Swap favicon to blood-red variant
+  tl.add(() => {
+    const link = document.querySelector<HTMLLinkElement>('link[rel="icon"]');
+    if (link) link.href = '/favicon-revealed.svg';
+  }, 0.75);
 
   // T+800ms — Persist in sessionStorage
   tl.add(() => {

@@ -1,0 +1,17 @@
+/* TEAM */
+Developer: m0rtyn
+Site: https://github.com/m0rtyn
+From: Earth
+
+/* THANKS */
+Ivan Roganov — for the comment that started this
+Human Rights Watch — for the investigation that sourced half this site
+ICIJ — for following the money
+
+/* SITE */
+Standards: HTML5, CSS3, ES2022
+Software: Astro 5, Tailwind CSS 3, React 19, GSAP
+Components: 14 Astro, 1 React island
+Animation: Single GSAP timeline, 14 steps
+Statistics: 11 sourced, 0 fabricated
+Cookies: 0

@@ -30,8 +30,27 @@ const paragraphs = [
     >
       View source on GitHub
     </ExternalLink>
-    <p class="text-xs text-gray-500 mt-2 font-mono">
-      Built with Astro, Tailwind CSS, and GSAP
-    </p>
+
+    <details class="mt-8 border border-gray-800 rounded-lg">
+      <summary class="text-xs text-gray-500 font-mono px-4 py-3 cursor-pointer hover:text-gray-400 transition-colors select-none">
+        Technical details
+      </summary>
+      <div class="px-4 pb-4 text-xs text-gray-500 font-mono leading-relaxed space-y-1">
+        <p>Static site: Astro 5 + Tailwind CSS 3 + React 19 island</p>
+        <p>The switch is a single GSAP timeline with 14 animation steps</p>
+        <p>11 statistics, each linked to its primary source — 0 fabricated</p>
+        <p>Zero cookies. Analytics via Plausible (privacy-respecting, no tracking)</p>
+        <p>Total components: 14 Astro + 1 React island</p>
+        <p>
+          Full source index:
+          <ExternalLink
+            href="https://github.com/m0rtyn/onlybots.cam/blob/main/docs/RESEARCH.md"
+            class="text-electric-blue hover:underline underline-offset-2"
+          >
+            RESEARCH.md
+          </ExternalLink>
+        </p>
+      </div>
+    </details>
   </div>
 </section>

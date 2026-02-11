@@ -61,14 +61,32 @@ import PlatformFooter from '@/features/bait-phase/components/platform-footer.ast
     sections.forEach((s) => observer.observe(s));
   }
 
+  /** Console easter egg — HN readers will see this */
+  function printConsoleMessage(): void {
+    const style = 'color: #cc0000; font-size: 14px; font-family: monospace; line-height: 1.6;';
+    const styleBold = 'color: #cc0000; font-size: 18px; font-weight: bold; font-family: monospace;';
+    const styleLink = 'color: #00a2ff; font-size: 12px; font-family: monospace;';
+    console.log('%c\n⚠ You opened DevTools. Good.', styleBold);
+    console.log('%cWhile you were reading this, ~12,000 webcam sessions were active worldwide.', style);
+    console.log('%c49 of 50 webcam models never signed their own terms of service.', style);
+    console.log('%cAverage model earns $180/month. The platform owner took home $1 billion.', style);
+    console.log('%c\nEvery statistic on this page is sourced:', style);
+    console.log('%chttps://github.com/m0rtyn/onlybots.cam/blob/main/docs/RESEARCH.md', styleLink);
+    console.log('%c\nBuilt with Astro, Tailwind, React, GSAP. Zero cookies. View source:', style);
+    console.log('%chttps://github.com/m0rtyn/onlybots.cam', styleLink);
+    console.log('');
+  }
+
   // Start tracking when reveal state activates (or immediately for returning visitors)
   if (document.body.classList.contains('reveal-state')) {
     initScrollTracking();
+    printConsoleMessage();
   } else {
     const mo = new MutationObserver(() => {
       if (document.body.classList.contains('reveal-state')) {
         mo.disconnect();
         initScrollTracking();
+        printConsoleMessage();
       }
     });
     mo.observe(document.body, { attributes: true, attributeFilter: ['class'] });
