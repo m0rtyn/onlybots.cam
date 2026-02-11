@@ -16,8 +16,7 @@
 |-------|-----------|
 | Framework | **Astro 5** (static output) |
 | Styling | **Tailwind CSS 3** |
-| Interactivity | **React 19** (Astro islands: `client:load`, `client:visible`) |
-| 3D | **Three.js** + `@react-three/fiber` + `@react-three/drei` |
+| Interactivity | **React 19** (Astro islands: `client:load`) |
 | Animations | **GSAP** (timeline + ScrollTrigger) |
 | Language | **TypeScript** (strict) |
 
@@ -44,7 +43,7 @@
 - `SPEC.md` — Full project specification (design, UX, content strategy, legal)
 - `PLAN.md` — Step-by-step implementation tasks with dependencies
 - `RESEARCH.md` — All sourced statistics, studies, and quotes
-- `src/components/TheSwitch.tsx` — Central state machine orchestrating the transition
+- `src/features/the-switch/components/the-switch.tsx` — Central state machine orchestrating the transition
 - `src/data/statistics.json` — Stat card pairings (bait label → reveal stat)
 - `src/data/testimonies.json` — Anonymized quotes from former webcam workers
 - `src/data/resources.json` — Anti-trafficking organizations and links

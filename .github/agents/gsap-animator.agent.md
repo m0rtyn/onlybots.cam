@@ -33,6 +33,8 @@ This is the most important animation in the entire project. It lives in `src/com
 | T+1500ms | Header drain | 500ms | Header opacity → 0.5, neon-pink → gray |
 | T+2000ms | Reveal sections | staggered 200ms | `.reveal-section` elements fade in + translate up |
 
+> **Note:** Three.js/DigitalCage has been removed from the project.
+
 ### GSAP patterns to use
 
 ```typescript

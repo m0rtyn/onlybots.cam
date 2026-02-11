@@ -10,7 +10,6 @@ description: Astro island architecture patterns for onlybots.cam including hydra
 | Directive | When it hydrates | Use for |
 |-----------|-----------------|---------|
 | `client:load` | Immediately on page load | TheSwitch.tsx — must be interactive ASAP |
-| `client:visible` | When scrolled into viewport |saves bandwidth |
 | `client:idle` | When browser is idle | Low-priority interactivity |
 | `client:media` | When media query matches | Responsive interactive elements |
 | (none) | Never — server only | Static Astro components |
@@ -22,13 +21,15 @@ index.astro
 ├── Layout.astro (server)
 ├── TheSwitch.tsx (client:load) ← orchestrates everything
 │   ├── PlatformHeader.astro (server, slotted)
-│   └── LandingGrid.astro (server, slotted)
-│       └── ProfileCard.astro (server, × 8)
-├── TheRealCost.astro (server, .reveal-section)
-├── BehindTheScreen.astro (server, .reveal-section)
-├── TheMachine.astro (server, .reveal-section)
-├── WhatYouCanDo.astro (server, .reveal-section)
-├── WhyIBuiltThis.astro (server, .reveal-section)
+│   └── main#main-content
+│       └── LandingGrid.astro (server, slotted)
+│           └── ProfileCard.astro (server, × 8+)
+├── #reveal-content
+│   ├── TheRealCost.astro (server, .reveal-section)
+│   ├── BehindTheScreen.astro (server, .reveal-section)
+│   ├── TheMachine.astro (server, .reveal-section)
+│   ├── WhatYouCanDo.astro (server, .reveal-section)
+│   └── WhyIBuiltThis.astro (server, .reveal-section)
 └── PlatformFooter.astro (server)
 ```
 

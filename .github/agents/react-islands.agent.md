@@ -16,11 +16,11 @@ handoffs:
 
 # React Islands Agent
 
-You build and maintain the two React interactive islands in onlybots.cam.
+You build and maintain the React interactive island in onlybots.cam.
 
-## The two islands
+## The island
 
-### 1. TheSwitch.tsx (`client:load`)
+### TheSwitch.tsx (`client:load`)
 The central state machine orchestrating the bait → reveal transition.
 
 - **State**: `phase: "bait" | "switching" | "revealed"`
