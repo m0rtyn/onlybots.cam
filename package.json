@@ -1,7 +1,14 @@
 {
   "name": "onlybots.cam",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "description": "A satirical art-activism website revealing the human cost of the webcam industry",
+  "author": "m0rtyn",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/m0rtyn/onlybots.cam"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",

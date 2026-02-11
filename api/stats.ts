@@ -12,8 +12,9 @@ export default async function handler(
   }
 
   try {
+    const year = new Date().getFullYear();
     const plausibleRes = await fetch(
-      'https://plausible.io/api/v1/stats/aggregate?site_id=onlybots.cam&period=custom&date=2026-01-01,2026-12-31&metrics=visitors',
+      `https://plausible.io/api/v1/stats/aggregate?site_id=onlybots.cam&period=custom&date=${year}-01-01,${year}-12-31&metrics=visitors`,
       { headers: { Authorization: `Bearer ${apiKey}` } },
     );
 
