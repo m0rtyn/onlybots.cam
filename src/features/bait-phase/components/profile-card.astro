@@ -34,10 +34,10 @@ const {
   revealSourceUrl,
 } = Astro.props;
 
-// Simple sequential mapping: 1st card -> model-1.png, 2nd -> model-2.png, etc.
-// If no image exists for the position, use default-avatar.png
+// Simple sequential mapping: 1st card -> model-1.jpg, 2nd -> model-2.jpg, etc.
+// If no image exists for the position, use default-avatar.jpg
 const imageNumber = index + 1;
-const imageFilename = imageNumber <= 9 ? `model-${imageNumber}.png` : 'default-avatar.png';
+const imageFilename = imageNumber <= 9 ? `model-${imageNumber}.jpg` : 'default-avatar.jpg';
 const avatarImageUrl = `/images/models/${imageFilename}`;
 
 // Badge styling
