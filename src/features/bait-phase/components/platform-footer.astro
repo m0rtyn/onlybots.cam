@@ -24,14 +24,14 @@ const topResources = resourcesData.slice(0, 4);
           href={r.url}
           target="_blank"
           rel="noopener noreferrer"
-          class="text-sm text-gray-400 hover:text-electric-blue transition-colors font-mono"
+          class={`text-sm text-gray-400 hover:text-electric-blue transition-colors font-mono plausible-event-name=resource_clicked plausible-event-resource=${r.name.replace(/\s/g, '+')}`}
         >
           {r.name}
         </a>
       ))}
     </nav>
 
-    <!-- Satire disclaimer -->
+    <!-- disclaimer -->
     <p class="text-xs text-gray-500 text-center max-w-lg leading-relaxed">
       This is a work of satire and social commentary. Not affiliated with any commercial platform.
     </p>

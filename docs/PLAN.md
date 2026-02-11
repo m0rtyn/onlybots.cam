@@ -281,7 +281,6 @@ Create `src/components/LandingGrid.astro`:
   - Notification counter: "1,247 models online now" (animated dot)
 - Below the grid:
   - Fake "Load More" button
-  - Fake chat bubble: "Bot is typing..." (animated dots)
 
 **Output:** Complete landing grid that looks like a real platform homepage.
 

@@ -28,7 +28,6 @@ This is the most important animation in the entire project. It lives in `src/com
 | T+400ms | Counter morph | 300ms | "1,247 models online" → "1,247 reported cases of coercion this year" |
 | T+500ms | Cards flip | staggered 100ms each, 600ms per flip | `rotateY(180deg)` on `.card-flip` elements |
 | T+500ms | Background shift | 500ms | `.static-noise` class added to body |
-| T+800ms | Typing bubble | 500ms | Real statistic replaces "Bot is typing..." |
 | T+1200ms | Typography shift | 400ms | Body font → monospaced (`font-mono` class) |
 | T+1500ms | Header drain | 500ms | Header opacity → 0.5, neon-pink → gray |
 | T+2000ms | Reveal sections | staggered 200ms | `.reveal-section` elements fade in + translate up |

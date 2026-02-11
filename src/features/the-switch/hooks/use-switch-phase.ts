@@ -39,6 +39,11 @@ export function useSwitchPhase(): UseSwitchPhaseReturn {
     setPhase('switching');
     phaseRef.current = 'switching';
 
+    // Analytics: track the core conversion event
+    window.plausible?.('switch_triggered', {
+      props: { method: reducedMotionRef.current ? 'instant' : 'animated' },
+    });
+
     // Reduced-motion shortcut
     if (reducedMotionRef.current) {
       applyRevealedState();

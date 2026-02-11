@@ -319,13 +319,12 @@ This is NOT a revenue project. But if traffic is significant:
 
 ### 💡 Creative Suggestions
 
-1. **"Typing indicator" fake chat:** Before the switch, show a chat bubble with a typing indicator ("Bot is typing...") that, after a beat, types out a real statistic instead of a flirty message. This is the micro-version of the entire concept.
-2. **Fake notification counter:** A badge showing "1,247 models online now" that, post-switch, changes to "1,247 reported cases of coercion this year."
-3. **Glitch aesthetic for AI portraits:** Use CSS `filter` and `mix-blend-mode` to make profile pictures look slightly corrupted — reinforcing the "something is wrong here" feeling before the explicit reveal.
-4. **Sound design (optional):** A subtle ambient hum that shifts to a heartbeat or silence on the switch. Risky (auto-play is hated) but powerful if user-initiated.
-5. **Easter egg in source code:** Add HTML comments with statistics. Developers who "View Source" get an extra layer.
-6. **Counter at the top:** "While you've been on this page, approximately X webcam sessions have started worldwide" — a live-updating estimate based on industry data.
-7. **The "Subscribe" button:** When clicked, instead of a paywall, show: "You were about to pay $9.99/month. She gets $3.20 of that. The rest goes to the platform. Here's what else that money could do:" followed by equivalent donations.
+1. **Fake notification counter:** A badge showing "1,247 models online now" that, post-switch, changes to "1,247 reported cases of coercion this year."
+2. **Glitch aesthetic for AI portraits:** Use CSS `filter` and `mix-blend-mode` to make profile pictures look slightly corrupted — reinforcing the "something is wrong here" feeling before the explicit reveal.
+3. **Sound design (optional):** A subtle ambient hum that shifts to a heartbeat or silence on the switch. Risky (auto-play is hated) but powerful if user-initiated.
+4. **Easter egg in source code:** Add HTML comments with statistics. Developers who "View Source" get an extra layer.
+5. **Counter at the top:** "While you've been on this page, approximately X webcam sessions have started worldwide" — a live-updating estimate based on industry data.
+6. **The "Subscribe" button:** When clicked, instead of a paywall, show: "You were about to pay $9.99/month. She gets $3.20 of that. The rest goes to the platform. Here's what else that money could do:" followed by equivalent donations.
 
 ---
 

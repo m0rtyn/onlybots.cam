@@ -30,3 +30,47 @@ import PlatformFooter from '@/features/bait-phase/components/platform-footer.ast
 
   <PlatformFooter />
 </Layout>
+
+<script>
+  /** Plausible scroll_depth tracking — fires once per reveal section reached */
+  function initScrollTracking(): void {
+    const sections = document.querySelectorAll<HTMLElement>('.reveal-section');
+    if (!sections.length) return;
+
+    const total = sections.length;
+    const reached = new Set<number>();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          const idx = Array.from(sections).indexOf(entry.target as HTMLElement);
+          if (idx === -1 || reached.has(idx)) continue;
+          reached.add(idx);
+          const depth = Math.round(((idx + 1) / total) * 100);
+          window.plausible?.('scroll_depth', {
+            props: { depth: `${depth}%` },
+            interactive: false,
+          });
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.3 },
+    );
+
+    sections.forEach((s) => observer.observe(s));
+  }
+
+  // Start tracking when reveal state activates (or immediately for returning visitors)
+  if (document.body.classList.contains('reveal-state')) {
+    initScrollTracking();
+  } else {
+    const mo = new MutationObserver(() => {
+      if (document.body.classList.contains('reveal-state')) {
+        mo.disconnect();
+        initScrollTracking();
+      }
+    });
+    mo.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+  }
+</script>
