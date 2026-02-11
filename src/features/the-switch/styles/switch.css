@@ -1,0 +1,16 @@
+@layer components {
+  .landing-grid {
+    transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out, filter 0.8s ease-in-out;
+  }
+
+  /* Reveal state - hide landing grid completely */
+  .reveal-state .landing-grid {
+    pointer-events: none;
+    user-select: none;
+    opacity: 0 !important;
+    transform: translateY(-50px) scale(0.95) !important;
+    filter: blur(8px) !important;
+    /* Clean up will-change after transition */
+    will-change: auto;
+  }
+}

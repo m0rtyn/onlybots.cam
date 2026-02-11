@@ -11,9 +11,9 @@ This is a satirical art-activism single-page website built with Astro 5, Tailwin
 
 ## Key reference documents
 
-- [SPEC.md](SPEC.md) — Full project specification
-- [PLAN.md](PLAN.md) — Implementation tasks with dependencies
-- [RESEARCH.md](RESEARCH.md) — All sourced statistics and studies
+- [SPEC.md](docs/SPEC.md) — Full project specification
+- [PLAN.md](docs/PLAN.md) — Implementation tasks with dependencies
+- [RESEARCH.md](docs/RESEARCH.md) — All sourced statistics and studies
 
 ## Component types
 

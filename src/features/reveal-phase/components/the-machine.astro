@@ -1,4 +1,7 @@
 ---
+import SectionHeading from '@/shared/components/ui/section-heading.astro';
+import SourceCitation from '@/shared/components/ui/source-citation.astro';
+
 const segments = [
   { label: "Platform: 50–65%", width: "55%", color: "#dc2626", textColor: "text-red-500" },
   { label: "Studio: ~25–35%", width: "35%", color: "#ea580c", textColor: "text-orange-500" },
@@ -8,9 +11,9 @@ const segments = [
 
 <!-- If you're a developer, consider how your skills could help: polarisproject.org -->
 <section class="reveal-section opacity-0 max-w-5xl mx-auto py-24 px-6">
-  <h2 class="font-mono text-3xl md:text-5xl font-bold mb-16" style="color: #ff4500; text-shadow: 0 0 30px rgba(255, 69, 0, 0.3);">
+  <SectionHeading color="#ff4500" class="text-3xl md:text-5xl mb-16">
     The Machine
-  </h2>
+  </SectionHeading>
   <p class="text-lg text-gray-500 font-mono mb-12">
     Where the money goes
   </p>
@@ -41,14 +44,10 @@ const segments = [
   </div>
 
   <!-- Source -->
-  <a
-    href="https://www.hrw.org/report/2024/12/09/i-learned-how-say-no/labor-abuses-sexual-exploitation-colombian-webcam-studios"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="text-xs text-gray-600 hover:text-gray-400 transition-colors underline underline-offset-2"
-  >
-    Source: HRW 2024
-  </a>
+  <SourceCitation
+    source="HRW 2024"
+    sourceUrl="https://www.hrw.org/report/2024/12/09/i-learned-how-say-no/labor-abuses-sexual-exploitation-colombian-webcam-studios"
+  />
 
   <!-- Contrast box -->
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16">
@@ -60,14 +59,11 @@ const segments = [
       <p class="text-sm text-gray-400 mt-3">
         OnlyFans owner dividends (2021–2023)
       </p>
-      <a
-        href="https://www.icij.org/news/2024/12/as-billion-dollar-webcam-industry-booms-models-suffer-at-hands-of-colombian-studios/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-xs text-gray-600 mt-2 hover:text-gray-400 transition-colors underline underline-offset-2 inline-block"
-      >
-        Source: ICIJ 2024
-      </a>
+      <SourceCitation
+        source="ICIJ 2024"
+        sourceUrl="https://www.icij.org/news/2024/12/as-billion-dollar-webcam-industry-booms-models-suffer-at-hands-of-colombian-studios/"
+        class="mt-2 inline-block"
+      />
     </div>
 
     <!-- Average creator -->
@@ -78,14 +74,11 @@ const segments = [
       <p class="text-sm text-gray-400 mt-3">
         Average monthly creator earnings
       </p>
-      <a
-        href="https://www.projectmonashouse.com/post/onlyfans-empowering-or-exploitative"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-xs text-gray-600 mt-2 hover:text-gray-400 transition-colors underline underline-offset-2 inline-block"
-      >
-        Source: Project Mona's House
-      </a>
+      <SourceCitation
+        source="Project Mona's House"
+        sourceUrl="https://www.projectmonashouse.com/post/onlyfans-empowering-or-exploitative"
+        class="mt-2 inline-block"
+      />
     </div>
   </div>
 
@@ -94,13 +87,10 @@ const segments = [
     <p class="font-mono text-lg text-gray-300 max-w-3xl mx-auto">
       49 of 50 webcam models had never seen or signed their own terms of service.
     </p>
-    <a
-      href="https://www.hrw.org/report/2024/12/09/i-learned-how-say-no/labor-abuses-sexual-exploitation-colombian-webcam-studios"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="text-xs text-gray-600 mt-2 hover:text-gray-400 transition-colors underline underline-offset-2 inline-block"
-    >
-      Source: HRW 2024
-    </a>
+    <SourceCitation
+      source="HRW 2024"
+      sourceUrl="https://www.hrw.org/report/2024/12/09/i-learned-how-say-no/labor-abuses-sexual-exploitation-colombian-webcam-studios"
+      class="mt-2 inline-block"
+    />
   </div>
 </section>

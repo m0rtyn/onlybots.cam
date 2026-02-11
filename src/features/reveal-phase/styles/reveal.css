@@ -1,0 +1,100 @@
+@layer components {
+  .reveal-state {
+    --accent: #cc0000;
+    --accent-dim: #8b0000;
+    --accent-glow: rgba(204, 0, 0, 0.15);
+    --warning: #ff4500;
+    --danger: #dc143c;
+  }
+
+  /* Reveal sections - completely hidden in bait mode */
+  .reveal-section {
+    display: none;
+  }
+
+  /* Show reveal sections only in reveal state */
+  .reveal-state .reveal-section {
+    display: block;
+    scroll-snap-align: start;
+    border-top: 1px solid rgba(204, 0, 0, 0.08);
+  }
+
+  .reveal-section.revealed {
+    will-change: auto; /* Clean up after animation */
+  }
+
+  /* Scroll snap for reveal state */
+  body.reveal-state {
+    scroll-snap-type: y proximity;
+    scroll-padding-top: 1rem;
+  }
+
+  /* Bait content wrapper - collapse in reveal state */
+  .reveal-state .bait-content {
+    min-height: 0 !important;
+  }
+
+  /* Scary red vignette overlay in reveal state */
+  body.reveal-state::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(139, 0, 0, 0.12) 100%);
+    animation: vignette-pulse 4s ease-in-out infinite;
+  }
+
+  /* View-driven heading magnification (native CSS scroll animation) */
+  @supports (animation-timeline: view()) {
+    .reveal-state .reveal-section h2 {
+      animation: heading-magnify linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 80%;
+    }
+
+    .reveal-state .reveal-section .stat-number {
+      animation: stat-magnify linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 70%;
+    }
+  }
+
+  /* Footer positioning */
+  .platform-footer {
+    margin-top: auto; /* Push footer to bottom in flexbox layout */
+  }
+
+  /* Reveal state - hide footer during reveal, show after */
+  .reveal-state .platform-footer {
+    opacity: 0.7;
+    transition: opacity 0.5s ease-out 1s; /* Delay footer appearance */
+  }
+
+  /* Scary logo in reveal state */
+  .reveal-state .platform-header {
+    border-bottom-color: rgba(139, 0, 0, 0.3);
+    background: linear-gradient(180deg, #0a0a0a 0%, rgba(139, 0, 0, 0.06) 100%);
+    overflow: visible !important;
+  }
+
+  .reveal-state .platform-header > div {
+    overflow: visible !important;
+  }
+
+  .logo-wrap {
+    overflow: visible;
+  }
+
+  .reveal-state .logo-main {
+    color: #cc0000 !important;
+    text-shadow: 0 0 8px rgba(204, 0, 0, 0.6), 0 0 20px rgba(204, 0, 0, 0.3);
+    animation: logo-glitch 3s ease-in-out infinite;
+  }
+
+  .reveal-state .logo-accent {
+    color: #ff0000 !important;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.8), 0 0 30px rgba(255, 0, 0, 0.4), 0 0 60px rgba(255, 0, 0, 0.15);
+    animation: logo-accent-flicker 2s ease-in-out infinite;
+  }
+}

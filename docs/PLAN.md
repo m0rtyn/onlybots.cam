@@ -6,7 +6,7 @@
 
 ---
 
-## 🚀 **PROJECT STATUS UPDATE (Feb 10, 2026)**
+## 🚀 **PROJECT STATUS UPDATE (Feb 11, 2026)**
 
 ### ✅ **COMPLETED PHASES (1–3, 6)**
 
@@ -42,7 +42,7 @@
 **Task 5.2 — Accessibility and performance:** ⏳ **PARTIAL**
 - ✅ `prefers-reduced-motion` respected in CSS (kills animations) and JS (skips GSAP, shows reveal directly)
 - ✅ `focus-visible` custom styles for `.subscribe-btn`, `.load-more-btn`, buttons, links
-- ✅ Skip-to-content link in Layout.astro, styled in global.css
+- ✅ Skip-to-content link in Layout.astro, styled in split CSS
 - ✅ `aria-live="polite"` region announces "Content has changed" during switch
 - ✅ Keyboard navigation — Enter/Space on trigger elements fires the switch
 - ✅ All external links have `target="_blank"` + `rel="noopener noreferrer"`
@@ -54,12 +54,72 @@
 - ✅ Easter egg HTML comments in LandingGrid, ProfileCard, TheRealCost, BehindTheScreen, TheMachine, WhatYouCanDo, PlatformFooter
 - ✅ `robots.txt` Easter egg comment
 
+### ✅ **BULLETPROOF REACT REFACTORING: COMPLETE**
+
+> Full refactoring performed Feb 10–11, 2026. Details in [REFACTOR-PLAN.md](REFACTOR-PLAN.md).
+
+**Structure migration:**
+- ✅ Flat `src/components/` (11 files) → 3 feature folders (`bait-phase`, `reveal-phase`, `the-switch`)
+- ✅ Shared infrastructure consolidated into `src/shared/` (components/ui, config, hooks, layouts, lib, styles, types)
+- ✅ `@/` path alias configured in `tsconfig.json` + `astro.config.mjs`, all imports absolute
+- ✅ kebab-case file naming enforced throughout
+
+**TheSwitch decomposition (554 lines → 6 modules):**
+- ✅ `the-switch.tsx` (~34 lines) — just hook + JSX render
+- ✅ `use-switch-phase.ts` (~196 lines) — phase state, sessionStorage, debug mode, event delegation
+- ✅ `switch-animation.ts` (~199 lines) — createSwitchTimeline() with 14 GSAP steps
+- ✅ `apply-revealed.ts` (~91 lines) — instant reveal for returning visitors
+- ✅ `dom-cache.ts` (~19 lines) — getCachedElements()
+- ✅ `types/index.ts` (~19 lines) — Phase, CachedElements, TheSwitchProps
+
+**CSS decomposition (334-line monolith → 6 files):**
+- ✅ `src/shared/styles/base.css` — @tailwind directives, fonts, @layer base
+- ✅ `src/shared/styles/animations.css` — 6 shared @keyframes
+- ✅ `src/shared/styles/accessibility.css` — skip-to-content, focus-visible, reduced-motion
+- ✅ `src/features/bait-phase/styles/bait.css` — .bait-state styles
+- ✅ `src/features/reveal-phase/styles/reveal.css` — .reveal-state styles
+- ✅ `src/features/the-switch/styles/switch.css` — transition styles
+
+**New shared modules:**
+- ✅ `src/shared/config/constants.ts` — STORAGE_KEY, REVEALED_*, ARIA_ANNOUNCEMENT
+- ✅ `src/shared/config/design-tokens.ts` — colors and fonts
+- ✅ `src/shared/types/common.ts` — Phase type
+- ✅ `src/shared/types/statistics.ts` — Statistic, Testimony, Resource interfaces
+- ✅ `src/shared/lib/gsap.ts` — centralized GSAP + ScrollToPlugin
+- ✅ `src/shared/hooks/use-reduced-motion.ts` — reactive prefers-reduced-motion hook
+- ✅ 3 shared UI components: external-link, source-citation, section-heading
+
+**Data deduplication:**
+- ✅ `behind-the-screen.astro` now imports from `testimonies.json`
+- ✅ `what-you-can-do.astro` now imports from `resources.json`
+- ✅ `landing-grid.astro` imports bot profiles from extracted `bot-profiles.ts`
+
+**Current file structure:**
+```
+src/
+├── data/                    # Static JSON (statistics, testimonies, resources)
+├── features/
+│   ├── bait-phase/          # 4 components + data/bot-profiles.ts + bait.css
+│   ├── reveal-phase/        # 5 components + reveal.css
+│   └── the-switch/          # 1 component + hook + 3 lib modules + types + switch.css
+├── pages/
+│   └── index.astro          # Single page assembly
+└── shared/
+    ├── components/ui/       # external-link, source-citation, section-heading
+    ├── config/              # constants.ts, design-tokens.ts
+    ├── hooks/               # use-reduced-motion.ts
+    ├── layouts/             # Layout.astro
+    ├── lib/                 # gsap.ts
+    ├── styles/              # base.css, animations.css, accessibility.css
+    └── types/               # common.ts, statistics.ts
+```
+
 ### ❌ **PHASE 7 — Deployment: NOT STARTED**
 
 - ❌ Task 7.1: No deployment config (no `vercel.json`, `wrangler.toml`, `netlify.toml`, no CI/CD)
 - ❌ Task 7.2: No analytics (no Plausible/Umami script, no custom event tracking)
 
-### 📊 **CURRENT STATUS: ~93% Complete**
+### 📊 **CURRENT STATUS: ~95% Complete**
 
 **✅ FULLY WORKING:**
 - Complete bait → reveal transition with optimized GSAP timeline
@@ -70,23 +130,32 @@
 - Accessibility: skip-to-content, focus-visible, aria-live, keyboard nav
 - All sourced statistics, testimonies, and resource links
 - HTML Easter eggs throughout source
+- **Bulletproof React architecture** with feature folders, shared infrastructure, absolute imports
 
 **⚠️ KNOWN ISSUES:**
 1. `og-image.png` not generated from SVG source — social sharing cards won't display correctly
 2. Three.js deps (`three`, `@react-three/fiber`, `@react-three/drei`) inflate `node_modules` — should be removed since DigitalCage is unused
-3. Scroll hint JSX in TheSwitch.tsx is commented out — CSS references `.scroll-hint` but it never renders
+3. Scroll hint JSX in TheSwitch is commented out — CSS references `.scroll-hint` but it never renders
 4. No `sitemap.xml` generator configured
+5. ESLint / Prettier / Husky not yet configured (Refactor Phase 0.2–0.4)
+6. `.github/instructions/*.md` `applyTo` globs need updating for new paths (Refactor Phase 7.11)
 
 **🎯 NEXT PRIORITIES:**
-1. Generate `og-image.png` from `og-image.svg` (or replace with a designed PNG)
-2. Remove unused Three.js dependencies and `DigitalCage.tsx`
-3. Run Lighthouse audit, fix any issues, target 95+ on all metrics
-4. Deploy to Vercel/Cloudflare Pages with custom domain `onlybots.cam`
-5. Add privacy-respecting analytics (Plausible or Umami)
+1. Run `astro build` — verify zero errors with refactored structure
+2. Generate `og-image.png` from `og-image.svg` (or replace with a designed PNG)
+3. Remove unused Three.js dependencies and `DigitalCage.tsx`
+4. Install ESLint + Prettier + Husky (Refactor Phase 0.2–0.4)
+5. Update `AGENTS.md`, `.github/copilot-instructions.md`, `.github/instructions/*.md` for new paths
+6. Run Lighthouse audit, fix any issues, target 95+ on all metrics
+7. Deploy to Vercel/Cloudflare Pages with custom domain `onlybots.cam`
+8. Add privacy-respecting analytics (Plausible or Umami)
 
 ---
 
-## Phase 1: Project Scaffold (Day 1)
+## Phase 1: Project Scaffold (Day 1) ✅ COMPLETE
+
+> All tasks in Phases 1–6 are **completed**. The task descriptions below are kept for historical reference.
+> File paths shown are the **original** paths — see the status section above or [REFACTOR-PLAN.md](REFACTOR-PLAN.md) for current paths.
 
 ### Task 1.1 — Initialize Astro + Tailwind project
 **Priority:** 🔴 Critical (blocks everything)

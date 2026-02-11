@@ -1,4 +1,7 @@
 ---
+import ExternalLink from '@/shared/components/ui/external-link.astro';
+import SectionHeading from '@/shared/components/ui/section-heading.astro';
+
 const paragraphs = [
   "I'm a developer. I bought the domain onlybots.cam as a creative experiment, but the more I researched the webcam industry, the more I felt compelled to use it for something that matters.",
   "Every statistic on this page is sourced from peer-reviewed research, investigative journalism, or human rights reports. No claims are unsourced. The horror is in the numbers.",
@@ -10,9 +13,9 @@ const paragraphs = [
 <section class="reveal-section opacity-0 max-w-3xl mx-auto py-24 px-6">
   <div class="border-t border-gray-800 mb-16"></div>
 
-  <h2 class="font-mono text-2xl font-bold text-gray-300 mb-8" style="text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);">
+  <SectionHeading color="#d1d5db" glowColor="rgba(255, 255, 255, 0.1)" class="text-2xl mb-8">
     Why I Built This
-  </h2>
+  </SectionHeading>
 
   {paragraphs.map((p) => (
     <p class="text-gray-400 font-mono text-base leading-relaxed mb-6">
@@ -21,14 +24,12 @@ const paragraphs = [
   ))}
 
   <div class="mt-12">
-    <a
+    <ExternalLink
       href="https://github.com/m0rtyn/onlybots.cam"
-      target="_blank"
-      rel="noopener noreferrer"
       class="text-electric-blue text-sm font-mono hover:underline underline-offset-2"
     >
       View source on GitHub
-    </a>
+    </ExternalLink>
     <p class="text-xs text-gray-600 mt-2 font-mono">
       Built with Astro, Tailwind CSS, and GSAP
     </p>

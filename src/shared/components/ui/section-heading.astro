@@ -1,0 +1,24 @@
+---
+interface Props {
+  color: string;
+  glowColor?: string;
+  class?: string;
+  center?: boolean;
+}
+
+const { color, glowColor, class: className = '', center = false } = Astro.props;
+
+// Auto-generate glow from the color if not provided
+const glow = glowColor || `${color}4D`; // 30% opacity hex
+---
+
+<h2
+  class:list={[
+    'font-mono font-bold',
+    center ? 'text-center' : '',
+    className,
+  ]}
+  style={`color: ${color}; text-shadow: 0 0 30px ${glow};`}
+>
+  <slot />
+</h2>

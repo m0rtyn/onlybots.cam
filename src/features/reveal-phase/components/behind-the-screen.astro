@@ -1,0 +1,38 @@
+---
+import testimoniesData from '@/data/testimonies.json';
+import ExternalLink from '@/shared/components/ui/external-link.astro';
+import SectionHeading from '@/shared/components/ui/section-heading.astro';
+---
+
+<!-- These are real words from real people. Every quote is sourced from published investigations. -->
+<section class="reveal-section opacity-0 max-w-4xl mx-auto py-24 px-6">
+  <SectionHeading color="#dc143c" class="text-3xl md:text-5xl mb-16">
+    Behind the Screen
+  </SectionHeading>
+  <p class="text-lg text-gray-500 font-mono mb-12">
+    In their own words
+  </p>
+
+  <div>
+    {testimoniesData.map((t) => (
+      <blockquote class="mb-16 pl-1 rounded-r-lg" style="border-left: 4px solid rgba(204, 0, 0, 0.7); background: linear-gradient(90deg, rgba(139, 0, 0, 0.08) 0%, transparent 60%);">
+        <p class="text-xl md:text-2xl text-gray-300 italic font-mono leading-relaxed pl-6">
+          "{t.quote}"
+        </p>
+        <p class="text-sm text-gray-500 mt-4 pl-6">
+          — {t.attribution}
+        </p>
+        <ExternalLink
+          href={t.sourceUrl}
+          class="text-xs text-gray-600 pl-6 hover:text-gray-400 transition-colors underline underline-offset-2 inline-block mt-1"
+        >
+          {t.source}
+        </ExternalLink>
+      </blockquote>
+    ))}
+  </div>
+
+  <p class="text-xs text-gray-600 text-center mt-8">
+    All testimonies sourced from published investigations and reporting.
+  </p>
+</section>

@@ -1,7 +1,7 @@
 ---
 name: Orchestrator
 description: Main development orchestrator for onlybots.cam. Delegates tasks to specialized subagents and coordinates the overall build.
-tools: ['read', 'edit/editFiles', 'search', 'web/fetch', 'agent']
+tools: ['read', 'edit/editFiles', 'search', 'web/fetch', 'exa/*', 'firecrawl/*', 'agent', 'context7/*']
 model: Claude Opus 4.6 (copilot)
 handoffs:
   - label: Review changes
@@ -20,8 +20,8 @@ You coordinate the development of onlybots.cam, a satirical art-activism website
 
 ## Your workflow
 
-1. Read [PLAN.md](../../PLAN.md) to understand the current task dependencies
-2. Read [SPEC.md](../../SPEC.md) for design and architecture requirements
+1. Read [PLAN.md](../../docs/PLAN.md) to understand the current task dependencies
+2. Read [SPEC.md](../../docs/SPEC.md) for design and architecture requirements
 3. Break work into subtasks and delegate to specialized subagents
 4. Use subagents in parallel when tasks are independent (see the parallelization chart in PLAN.md)
 
@@ -40,5 +40,5 @@ You coordinate the development of onlybots.cam, a satirical art-activism website
 - This is a **single-page** app — everything assembles in `src/pages/index.astro`
 - Two CSS states: `.bait-state` and `.reveal-state` on `<body>`
 - Once switched, `sessionStorage` preserves the reveal state — no way back
-- All statistics MUST have source URLs from [RESEARCH.md](../../RESEARCH.md)
+- All statistics MUST have source URLs from [RESEARCH.md](../../docs/RESEARCH.md)
 - Respect `prefers-reduced-motion`

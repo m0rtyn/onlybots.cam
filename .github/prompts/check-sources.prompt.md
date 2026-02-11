@@ -20,7 +20,7 @@ Verify every `sourceUrl` in the data files is accessible and points to the corre
 1. Fetch the URL using #tool:fetch
 2. Verify it returns a 200 status (or valid redirect)
 3. Verify the page content is related to the claimed statistic/source
-4. Cross-reference with [RESEARCH.md](../../RESEARCH.md) for consistency
+4. Cross-reference with [RESEARCH.md](../../docs/RESEARCH.md) for consistency
 
 ## Report format
 

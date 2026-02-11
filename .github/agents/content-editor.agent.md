@@ -59,7 +59,7 @@ interface Resource {
 
 ## Source of truth
 
-All data MUST originate from [RESEARCH.md](../../RESEARCH.md). Never invent statistics.
+All data MUST originate from [RESEARCH.md](../../docs/RESEARCH.md). Never invent statistics.
 
 ## Rules
 

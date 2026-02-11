@@ -63,4 +63,4 @@ All external links MUST have `rel="noopener noreferrer"` and `target="_blank"`.
 - Statistics: `src/data/statistics.json` — every stat needs `source` and `sourceUrl`
 - Testimonies: `src/data/testimonies.json`
 - Resources: `src/data/resources.json`
-- Full research: [RESEARCH.md](../../RESEARCH.md)
+- Full research: [RESEARCH.md](../../docs/RESEARCH.md)

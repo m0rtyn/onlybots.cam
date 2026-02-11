@@ -12,7 +12,7 @@ Add a new statistic entry to [statistics.json](../../src/data/statistics.json).
 
 ## Steps
 
-1. Read [RESEARCH.md](../../RESEARCH.md) to find the relevant data point
+1. Read [RESEARCH.md](../../docs/RESEARCH.md) to find the relevant data point
 2. Read [statistics.json](../../src/data/statistics.json) to understand the existing format and avoid duplicates
 3. Verify the source URL is accessible using #tool:fetch
 4. Create a compelling bait/reveal pairing:

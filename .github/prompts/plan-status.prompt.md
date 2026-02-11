@@ -7,11 +7,11 @@ tools: ['read', 'search']
 
 # Implementation Status Report
 
-Analyze the current state of the codebase against [PLAN.md](../../PLAN.md).
+Analyze the current state of the codebase against [PLAN.md](../../docs/PLAN.md).
 
 ## Steps
 
-1. Read [PLAN.md](../../PLAN.md) for the full task list
+1. Read [PLAN.md](../../docs/PLAN.md) for the full task list
 2. For each task, check if the corresponding files exist and are implemented:
    - Task 1.1: Check `astro.config.mjs`, `tailwind.config.mjs`, `global.css`, `Layout.astro`
    - Task 1.2: Check `src/data/statistics.json`, `testimonies.json`, `resources.json`

@@ -1,0 +1,21 @@
+---
+interface Props {
+  source: string;
+  sourceUrl: string;
+  class?: string;
+}
+
+const { source, sourceUrl, class: className = '' } = Astro.props;
+---
+
+<a
+  href={sourceUrl}
+  target="_blank"
+  rel="noopener noreferrer"
+  class:list={[
+    'text-xs text-gray-600 hover:text-gray-400 transition-colors underline underline-offset-2',
+    className,
+  ]}
+>
+  Source: {source}
+</a>

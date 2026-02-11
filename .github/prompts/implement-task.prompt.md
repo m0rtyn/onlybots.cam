@@ -8,14 +8,14 @@ argument-hint: "Task number from PLAN.md, e.g. 3.1"
 
 # Implement Task from PLAN.md
 
-The user wants to implement a specific task from [PLAN.md](../../PLAN.md).
+The user wants to implement a specific task from [PLAN.md](../../docs/PLAN.md).
 
 ## Steps
 
-1. Read [PLAN.md](../../PLAN.md) and find the task matching the user's input: `${input:taskNumber:Task number e.g. 3.1}`
+1. Read [PLAN.md](../../docs/PLAN.md) and find the task matching the user's input: `${input:taskNumber:Task number e.g. 3.1}`
 2. Read the task's dependencies — check if they are already completed by examining the existing source files
-3. Read [SPEC.md](../../SPEC.md) for any relevant design requirements
-4. Read [RESEARCH.md](../../RESEARCH.md) if the task involves statistics or content
+3. Read [SPEC.md](../../docs/SPEC.md) for any relevant design requirements
+4. Read [RESEARCH.md](../../docs/RESEARCH.md) if the task involves statistics or content
 5. Implement the task exactly as specified in PLAN.md
 6. After implementation, verify:
    - TypeScript compiles without errors

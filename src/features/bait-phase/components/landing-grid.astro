@@ -1,19 +1,8 @@
 ---
 // LandingGrid.astro — Main grid of ProfileCards driven by statistics.json
-import ProfileCard from './ProfileCard.astro';
-import statisticsData from '../data/statistics.json';
-
-// Bot-style presentation data for each card (visual chrome for the "bait" face)
-const botProfiles = [
-  { name: 'Model_4827', badge: '🔥 Live Now', fans: '4,892', rating: '4.9', price: '$9.99', avatarSeed: 4827 },
-  { name: 'Unit_0093',  badge: '✨ New',      fans: '1,247', rating: '4.7', price: '$14.99', avatarSeed: 93 },
-  { name: 'Entity_7741', badge: '⭐ Top Rated', fans: '12,408', rating: '5.0', price: '$19.99', avatarSeed: 7741 },
-  { name: 'Synth_3319', badge: '🔥 Live Now', fans: '3,156', rating: '4.8', price: '$7.99', avatarSeed: 3319 },
-  { name: 'Pixel_8856', badge: '✨ New',      fans: '891',   rating: '4.6', price: '$11.99', avatarSeed: 8856 },
-  { name: 'Nova_2104',  badge: '🔥 Live Now', fans: '6,723', rating: '4.9', price: '$9.99', avatarSeed: 2104 },
-  { name: 'Echo_5567',  badge: '⭐ Top Rated', fans: '8,341', rating: '4.8', price: '$24.99', avatarSeed: 5567 },
-  { name: 'Void_9902',  badge: '✨ New',      fans: '2,034', rating: '4.7', price: '$12.99', avatarSeed: 9902 },
-];
+import ProfileCard from './profile-card.astro';
+import { botProfiles } from '../data/bot-profiles';
+import statisticsData from '@/data/statistics.json';
 
 // Merge bot profiles with statistics data (take first 9 stats)
 const cards = statisticsData.slice(0, 9).map((stat, i) => ({
