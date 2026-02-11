@@ -32,8 +32,6 @@ You audit onlybots.cam for accessibility, performance, and quality.
 - [ ] Lighthouse score 95+ on all metrics
 - [ ] First Contentful Paint < 1.5s
 - [ ] Total bundle (excluding Three.js) < 500KB
-- [ ] Three.js lazy-loads via `client:visible`
-- [ ] CSS fallback exists while Three.js loads
 - [ ] No layout shifts during hydration
 - [ ] Images optimized (if any)
 

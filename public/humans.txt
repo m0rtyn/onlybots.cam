@@ -1,6 +1,7 @@
 /* TEAM */
 Developer: m0rtyn
-Site: https://github.com/m0rtyn
+Site: https://m0rtyn.cc
+GitHub: https://github.com/m0rtyn
 From: Earth
 
 /* THANKS */

@@ -33,7 +33,6 @@ You review all code changes for onlybots.cam against the project spec.
 - [ ] External links have `rel="noopener noreferrer" target="_blank"`
 
 ### Performance
-- [ ] Three.js uses `client:visible`, not `client:load`
 - [ ] No unnecessary re-renders in React components
 - [ ] Images have explicit dimensions to prevent CLS
 - [ ] Bundle size stays reasonable

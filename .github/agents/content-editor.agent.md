@@ -64,7 +64,6 @@ All data MUST originate from [RESEARCH.md](../../docs/RESEARCH.md). Never invent
 ## Rules
 
 - Every statistic must have a `sourceUrl` pointing to the original study/report
-- No unsourced claims — one bad stat destroys credibility on HN
 - Testimonies must be anonymized
 - Tone: clinical + emotional, not preachy
 - Target is the industry, not the consumer

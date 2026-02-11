@@ -16,7 +16,6 @@ Create a new component following the onlybots.cam architecture.
 - Use **`.tsx` React island** ONLY if the component requires:
   - Client-side state management
   - Event handlers that can't be inline `<script>`
-  - Three.js / WebGL rendering
   - GSAP timeline orchestration
 
 ## Astro component template
