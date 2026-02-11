@@ -21,7 +21,6 @@ Analyze the current state of the codebase against [PLAN.md](../../docs/PLAN.md).
    - Task 3.1: Check `src/components/TheSwitch.tsx`
    - Task 3.2: Check if StatCard exists or is integrated into ProfileCard
    - Task 3.3: Check `TheRealCost.astro`, `BehindTheScreen.astro`, `TheMachine.astro`, `WhatYouCanDo.astro`, `WhyIBuiltThis.astro`
-   - Task 4.1: Check `src/components/DigitalCage.tsx`
    - Task 5.1: Check SEO/OG tags in `Layout.astro`
    - Task 5.2: A11y compliance (defer to audit prompt)
    - Task 5.3: HTML comments in source

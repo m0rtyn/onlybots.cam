@@ -10,7 +10,7 @@ description: Astro island architecture patterns for onlybots.cam including hydra
 | Directive | When it hydrates | Use for |
 |-----------|-----------------|---------|
 | `client:load` | Immediately on page load | TheSwitch.tsx — must be interactive ASAP |
-| `client:visible` | When scrolled into viewport | DigitalCage.tsx — saves bandwidth |
+| `client:visible` | When scrolled into viewport |saves bandwidth |
 | `client:idle` | When browser is idle | Low-priority interactivity |
 | `client:media` | When media query matches | Responsive interactive elements |
 | (none) | Never — server only | Static Astro components |
@@ -29,7 +29,6 @@ index.astro
 ├── TheMachine.astro (server, .reveal-section)
 ├── WhatYouCanDo.astro (server, .reveal-section)
 ├── WhyIBuiltThis.astro (server, .reveal-section)
-├── DigitalCage.tsx (client:visible)
 └── PlatformFooter.astro (server)
 ```
 
@@ -40,16 +39,6 @@ Islands cannot share React state. They communicate through the DOM:
 ```typescript
 // TheSwitch.tsx — sets body class
 document.body.classList.add('reveal-state');
-
-// DigitalCage.tsx — observes body class
-const observer = new MutationObserver((mutations) => {
-  for (const mutation of mutations) {
-    if (document.body.classList.contains('reveal-state')) {
-      setIsRevealed(true);
-    }
-  }
-});
-observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
 ```
 
 ## Slotting Astro Content into React Islands

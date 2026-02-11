@@ -28,7 +28,7 @@ You coordinate the development of onlybots.cam, a satirical art-activism website
 ## Delegation rules
 
 - **Astro components** (.astro files) → delegate to the **Astro Builder** agent
-- **React islands** (TheSwitch.tsx, DigitalCage.tsx) → delegate to the **React Islands** agent
+- **React islands** (TheSwitch.tsx) → delegate to the **React Islands** agent
 - **GSAP animations** and transitions → delegate to the **GSAP Animator** agent
 - **Tailwind CSS / styling** → delegate to the **Stylist** agent
 - **Data files / statistics / sources** → delegate to the **Content Editor** agent

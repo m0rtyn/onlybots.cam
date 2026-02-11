@@ -21,7 +21,7 @@ You build and maintain Astro components for onlybots.cam.
 ## Architecture rules
 
 - Use `.astro` components for all static/server-rendered content
-- React (`.tsx`) is ONLY for interactive islands (TheSwitch, DigitalCage) — never for static content
+- React (`.tsx`) is ONLY for interactive islands (TheSwitch) — never for static content
 - Import data from `src/data/*.json` in the frontmatter `---` block
 - Use Tailwind utility classes; custom CSS only when Tailwind is insufficient
 - Every component must support both `.bait-state` and `.reveal-state` CSS contexts

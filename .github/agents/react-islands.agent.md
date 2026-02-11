@@ -1,6 +1,6 @@
 ---
 name: React Islands
-description: Builds and maintains React interactive islands — TheSwitch.tsx state machine and DigitalCage.tsx Three.js scene.
+description: Builds and maintains React interactive islands — TheSwitch.tsx state machine.
 tools: ['read', 'edit/editFiles', 'search', 'web/fetch']
 model: Claude Opus 4.6 (copilot)
 handoffs:
@@ -30,17 +30,6 @@ The central state machine orchestrating the bait → reveal transition.
 - **DOM manipulation**: Queries `.card-flip`, `.reveal-section`, `.platform-header`, `.online-counter`, `.typing-dots`
 - **Accessibility**: `aria-live` region announces content change, respects `prefers-reduced-motion`
 
-### 2. DigitalCage.tsx (`client:visible`)
-Three.js wireframe cage scene using @react-three/fiber + @react-three/drei.
-
-- **Scene**: Slowly rotating wireframe cage with humanoid silhouette inside
-- **Bait state**: White/gray wireframe, slow rotation (~0.2 rad/s)
-- **Reveal state**: Red wireframe, faster rotation, silhouette glitches
-- **Detection**: MutationObserver on `body` class for `.reveal-state`
-- **Performance**: Must target 60fps on mid-range devices, lazy-loaded
-- **Fallback**: Graceful degradation when WebGL unavailable
-- **Reduced motion**: Static pose, no rotation or glitch
-
 ## TypeScript rules
 
 - Strict TypeScript — no `any`, no `@ts-ignore`
@@ -52,5 +41,4 @@ Three.js wireframe cage scene using @react-three/fiber + @react-three/drei.
 
 - These are Astro islands — they hydrate independently
 - `client:load` = hydrate immediately (TheSwitch — must be interactive ASAP)
-- `client:visible` = hydrate when scrolled into view (DigitalCage — saves bandwidth)
 - Never assume other islands are hydrated — communicate via DOM (classList, MutationObserver)

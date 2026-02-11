@@ -32,7 +32,6 @@ This is the most important animation in the entire project. It lives in `src/com
 | T+1200ms | Typography shift | 400ms | Body font → monospaced (`font-mono` class) |
 | T+1500ms | Header drain | 500ms | Header opacity → 0.5, neon-pink → gray |
 | T+2000ms | Reveal sections | staggered 200ms | `.reveal-section` elements fade in + translate up |
-| T+2500ms | Three.js activate | — | DigitalCage detects `.reveal-state` via MutationObserver |
 
 ### GSAP patterns to use
 

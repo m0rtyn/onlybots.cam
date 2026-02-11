@@ -17,7 +17,7 @@ Run the complete audit checklist from SPEC.md Task 5.2.
 
 ## Focus areas
 
-- `prefers-reduced-motion` support in TheSwitch.tsx and DigitalCage.tsx
+- `prefers-reduced-motion` support in TheSwitch.tsx
 - `aria-live` region for the switch content change
 - External link attributes (`rel="noopener noreferrer" target="_blank"`)
 - Keyboard accessibility of Subscribe buttons and interactive elements

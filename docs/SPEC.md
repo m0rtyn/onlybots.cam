@@ -130,7 +130,6 @@ onlybots.cam/
 │   │   ├── ProfileCard.astro      # Individual card (bait state)
 │   │   ├── StatCard.astro         # Individual card (reveal state)
 │   │   ├── TheSwitch.tsx          # React island for transition logic
-│   │   ├── DigitalCage.tsx        # Three.js scene (React island)
 │   │   ├── Statistics.astro       # Data visualization section
 │   │   ├── Testimonies.astro      # Anonymized stories
 │   │   └── Resources.astro        # Links to organizations

@@ -20,7 +20,7 @@ This is a satirical art-activism single-page website built with Astro 5, Tailwin
 | Extension | Use for | Hydration |
 |-----------|---------|-----------|
 | `.astro` | Static content, layouts, data-driven sections | Server only (zero JS) |
-| `.tsx` | Interactive islands (TheSwitch, DigitalCage) | `client:load` or `client:visible` |
+| `.tsx` | Interactive islands (TheSwitch) | `client:load` or `client:visible` |
 
 ## Data integrity
 
@@ -39,7 +39,7 @@ Every statistic displayed on the site must have a verifiable `sourceUrl` pointin
 |-------|---------|
 | **Orchestrator** | Coordinates multi-step work, delegates to subagents |
 | **Astro Builder** | Builds/edits .astro components |
-| **React Islands** | TheSwitch.tsx and DigitalCage.tsx |
+| **React Islands** | TheSwitch.tsx |
 | **GSAP Animator** | Animations and the switch transition |
 | **Stylist** | Tailwind CSS, global styles, visual design |
 | **Content Editor** | Data files, statistics, source verification |

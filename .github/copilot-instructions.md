@@ -32,7 +32,7 @@
 ### Architecture Rules
 
 - **Single page** — everything lives in `src/pages/index.astro`
-- **Astro components** (`.astro`) for static content, **React islands** (`.tsx`) only for interactivity (TheSwitch, DigitalCage)
+- **Astro components** (`.astro`) for static content, **React islands** (`.tsx`) only for interactivity (TheSwitch)
 - **Two CSS states**: `.bait-state` and `.reveal-state` on `<body>`
 - **Data files** in `src/data/*.json` — all statistics MUST have source URLs
 - **No way back** — once switched, `sessionStorage` preserves the reveal state
@@ -45,7 +45,6 @@
 - `PLAN.md` — Step-by-step implementation tasks with dependencies
 - `RESEARCH.md` — All sourced statistics, studies, and quotes
 - `src/components/TheSwitch.tsx` — Central state machine orchestrating the transition
-- `src/components/DigitalCage.tsx` — Three.js wireframe cage scene
 - `src/data/statistics.json` — Stat card pairings (bait label → reveal stat)
 - `src/data/testimonies.json` — Anonymized quotes from former webcam workers
 - `src/data/resources.json` — Anti-trafficking organizations and links
